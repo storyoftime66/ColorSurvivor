@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blob.svg-f43c34e0056960d33e3fc1cf3ef96be6.stex"
+path="res://.import/magic_missle.svg-a7c9b4fbaa5489ab12003ea0b0cb3e37.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Arts/Player/blob.svg"
-dest_files=[ "res://.import/blob.svg-f43c34e0056960d33e3fc1cf3ef96be6.stex" ]
+source_file="res://weapons/projectiles/magic_missle/magic_missle.svg"
+dest_files=[ "res://.import/magic_missle.svg-a7c9b4fbaa5489ab12003ea0b0cb3e37.stex" ]
 
 [params]
 
