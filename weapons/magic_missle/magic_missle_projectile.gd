@@ -15,5 +15,9 @@ func _ready():
 #	pass
 
 
-func _on_MagicMissle_body_entered(body):
+func _on_MagicMissle_body_entered(body) -> void:
 	pass # Replace with function body.
+
+
+func _on_LifeSpan_timeout() -> void:
+	queue_free()
