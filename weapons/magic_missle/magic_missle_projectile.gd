@@ -1,23 +1,6 @@
-extends RigidBody2D
+extends BaseProjectile
 
+class_name MagicMissleProjectile
 
-var damage: float = 5
-var speed: float = 1000
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	linear_velocity = Vector2(speed, 0).rotated(0)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_MagicMissle_body_entered(body) -> void:
-	pass # Replace with function body.
-
-
-func _on_LifeSpan_timeout() -> void:
-	queue_free()
+func _process(delta):
+	move_local_x(speed * delta)

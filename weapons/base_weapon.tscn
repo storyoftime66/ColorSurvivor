@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://weapons/base_weapon.gd" type="Script" id=1]
+
+[node name="BaseWeapon" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ShootingTimer" type="Timer" parent="."]
+one_shot = true
+__meta__ = {
+"_editor_description_": "射击冷却定时器"
+}
+
+[node name="ShootingIntervalTimer" type="Timer" parent="."]
+__meta__ = {
+"_editor_description_": "单次射击中，多个发射物间生成间隔的定时器"
+}
+
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_ShootingTimer_timeout"]
+[connection signal="timeout" from="ShootingIntervalTimer" to="." method="_on_ShootingIntervalTimer_timeout"]

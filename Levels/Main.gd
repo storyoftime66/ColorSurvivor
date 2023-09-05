@@ -11,6 +11,10 @@ var player
 func _ready():
 	player = $PlayerCharacter
 	print("Main ready")
+	
+	var magic_missle = load("res://weapons/magic_missle/magic_missle.tscn").instance()
+	player.add_child(magic_missle)
+	magic_missle.owner = player
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
