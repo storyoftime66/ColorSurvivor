@@ -99,7 +99,7 @@ func _ready():
 #	pass
 
 # 生成单个发射物
-func spawn_projectile(pos: Vector2, rot: float) -> void:
+func spawn_projectile(target_pos: Vector2) -> void:
 	var projectile = projectile_scene_class.instance() as BaseProjectile
 	projectile.damage = damage_attribute.value
 	projectile.speed = speed_attribute.value
@@ -108,17 +108,18 @@ func spawn_projectile(pos: Vector2, rot: float) -> void:
 	projectile.global_position = global_position
 	
 	main_scene.add_child(projectile)
+	projectile.look_at(target_pos)
 
 # 进行射击
 func _on_ShootingTimer_timeout():
 	remaining_amount = int(amount_attribute.value)
 	$ShootingIntervalTimer.start(max(shooting_interval, 0.05))
 
-# 单发射击
+# 单发射击（子类通常需要重载这个方法来实现自己的射击效果）
 func _on_ShootingIntervalTimer_timeout():
 	remaining_amount -= 1
 	if remaining_amount >= 0:
-		spawn_projectile(global_position, 0)
+		spawn_projectile(global_position + Vector2(1, 0))
 	else:
 		$ShootingIntervalTimer.stop()
 		$ShootingTimer.start(cooldown)
