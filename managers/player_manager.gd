@@ -12,7 +12,6 @@ func _ready():
 	main_scene = get_parent().get_node("Main")
 	player_character = main_scene.get_node("PlayerCharacter")
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	player_position = player_character.position
+	player_position = player_character.global_position
