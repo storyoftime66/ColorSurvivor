@@ -69,6 +69,7 @@ export var duration: float = 3.0
 export var amount: int = 1
 export var cooldown: float = 2.0
 export var penetration: int = 1
+export var impact: float = 1.0
 var shooting_interval: float = 0.05
 
 # 武器属性
@@ -78,6 +79,7 @@ var duration_attribute: Attribute
 var amount_attribute: Attribute
 var cooldown_attribute: Attribute
 var penetration_attribute: Attribute
+var impact_attribute: Attribute
 
 # 武器状态
 # 单次发射中剩余未发射的数量
@@ -92,6 +94,7 @@ func _ready():
 	amount_attribute = Attribute.new(amount)
 	cooldown_attribute = Attribute.new(cooldown)
 	penetration_attribute = Attribute.new(penetration)
+	impact_attribute = Attribute.new(impact)
 	
 	$ShootingTimer.start(cooldown_attribute.value)
 

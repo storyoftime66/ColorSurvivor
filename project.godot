@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://weapons/base_weapon.gd"
 }, {
+"base": "Node2D",
+"class": "DamageNumber",
+"language": "GDScript",
+"path": "res://ui/gameplay/damage_number.gd"
+}, {
 "base": "BaseEnemy",
 "class": "DebugEnemy",
 "language": "GDScript",
@@ -53,6 +58,7 @@ _global_script_class_icons={
 "BaseEnemy": "",
 "BaseProjectile": "",
 "BaseWeapon": "",
+"DamageNumber": "",
 "DebugEnemy": "",
 "GitAPI": "",
 "MagicMissle": "",
