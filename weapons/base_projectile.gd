@@ -24,6 +24,7 @@ func _on_hit(body):
 	var enemy = body as BaseEnemy
 	if enemy != null:
 		enemy.take_damage(damage)
+		PlayerManager.spawn_damage_number(enemy.global_position, damage)
 	penetration -= 1
 	if penetration == 0:
 		destroy()
