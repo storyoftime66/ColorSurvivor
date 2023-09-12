@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "KinematicBody2D",
+"base": "RigidBody2D",
 "class": "BaseEnemy",
 "language": "GDScript",
 "path": "res://characters/enemies/base_enemy.gd"
@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
 }, {
+"base": "BaseProjectile",
+"class": "KnifeProjectile",
+"language": "GDScript",
+"path": "res://weapons/knifes/knife_projectile.gd"
+}, {
+"base": "BaseWeapon",
+"class": "Knifes",
+"language": "GDScript",
+"path": "res://weapons/knifes/knifes.gd"
+}, {
 "base": "BaseWeapon",
 "class": "MagicMissle",
 "language": "GDScript",
@@ -48,6 +58,11 @@ _global_script_classes=[ {
 "class": "MagicMissleProjectile",
 "language": "GDScript",
 "path": "res://weapons/magic_missle/magic_missle_projectile.gd"
+}, {
+"base": "BaseWeapon",
+"class": "Onion",
+"language": "GDScript",
+"path": "res://weapons/onion/Onion.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerCharacter",
@@ -61,8 +76,11 @@ _global_script_class_icons={
 "DamageNumber": "",
 "DebugEnemy": "",
 "GitAPI": "",
+"KnifeProjectile": "",
+"Knifes": "",
 "MagicMissle": "",
 "MagicMissleProjectile": "",
+"Onion": "",
 "PlayerCharacter": ""
 }
 
@@ -76,6 +94,7 @@ config/icon="res://icon.png"
 
 PlayerManager="*res://managers/player_manager.gd"
 EnemyManager="*res://managers/enemy_manager.tscn"
+WeaponManager="*res://managers/weapon_manager.gd"
 
 [display]
 
@@ -117,6 +136,11 @@ move_down={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+debug_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -126,7 +150,7 @@ move_down={
 [physics]
 
 common/enable_pause_aware_picking=true
-common/enable_object_picking=false
+2d/default_gravity=0
 
 [rendering]
 

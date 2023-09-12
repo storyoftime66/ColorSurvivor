@@ -3,7 +3,7 @@
 [ext_resource path="res://weapons/base_projectile.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 12.0416
+radius = 5.09902
 
 [node name="BaseProjectile" type="Area2D"]
 collision_layer = 0

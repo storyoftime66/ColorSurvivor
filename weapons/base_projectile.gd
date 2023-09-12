@@ -2,14 +2,20 @@ extends Area2D
 
 class_name BaseProjectile
 
-# 伤害、飞行速度、持续时间、穿透敌人
+# 伤害、范围、飞行速度、持续时间、穿透敌人
 var damage: float = 10.0
+var area: float = 5.0
 var speed: float = 800.0
 var duration: float = 3.0
 var penetration: int = 1
+var impact: float = 500.0
 
 func _ready():
 	$LifeSpan.start(duration)
+
+# 向前移动
+func _physics_process(delta):
+	move_local_x(speed * delta)
 
 # 销毁发射物
 func destroy() -> void:
@@ -23,8 +29,9 @@ func _on_LifeSpan_timeout():
 func _on_hit(body):
 	var enemy = body as BaseEnemy
 	if enemy != null:
-		enemy.take_damage(damage)
-		PlayerManager.spawn_damage_number(enemy.global_position, damage)
+		var impact_impulse = Vector2(1.0, 0.0).rotated(global_rotation) * impact
+		var actual_damage = enemy.take_damage(damage, impact_impulse)
+		PlayerManager.spawn_damage_number(enemy.global_position, actual_damage)
 	penetration -= 1
 	if penetration == 0:
 		destroy()

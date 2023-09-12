@@ -1,16 +1,11 @@
 extends BaseWeapon
 
+# 魔法弹，朝最近的敌人发射一枚飞弹
 class_name MagicMissle
-#
 
 func _ready():
 	._ready()
-	projectile_scene_class = load("res://weapons/magic_missle/magic_missle_projectile.tscn")
+	projectile_scene = preload("res://weapons/magic_missle/magic_missle_projectile.tscn")
 	
-func _on_ShootingIntervalTimer_timeout():
-	remaining_amount -= 1
-	if remaining_amount >= 0:
-		spawn_projectile(EnemyManager.get_closest_enemy_position())
-	else:
-		$ShootingIntervalTimer.stop()
-		$ShootingTimer.start(cooldown)
+func get_target_position() -> Vector2:
+	return EnemyManager.get_closest_enemy_position()
