@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://weapons/knifes/knifes.gd" type="Script" id=1]
+[ext_resource path="res://weapons/base_weapon.tscn" type="PackedScene" id=2]
+
+[node name="Knifes" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+damage = 5.0
+speed = 600.0
+amount = 2
+cooldown = 1.0
