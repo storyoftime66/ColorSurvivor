@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://weapons/base_weapon.gd"
 }, {
+"base": "Object",
+"class": "CommonTypes",
+"language": "GDScript",
+"path": "res://common/common_types.gd"
+}, {
 "base": "Node2D",
 "class": "DamageNumber",
 "language": "GDScript",
@@ -73,6 +78,7 @@ _global_script_class_icons={
 "BaseEnemy": "",
 "BaseProjectile": "",
 "BaseWeapon": "",
+"CommonTypes": "",
 "DamageNumber": "",
 "DebugEnemy": "",
 "GitAPI": "",
