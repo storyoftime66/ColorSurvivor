@@ -10,11 +10,10 @@ radius = 50.0
 [node name="Onion" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 damage = 2.0
-cooldown = 1.0
-impact = 300.0
+cooldown = 0.25
+impact = 100.0
 
 [node name="ShootingTimer" parent="." index="0"]
-wait_time = 0.5
 one_shot = false
 
 [node name="DamageArea" type="Area2D" parent="." index="2"]
