@@ -1,7 +1,6 @@
-extends RigidBody2D
+class_name BaseEnemy extends RigidBody2D
 
 # 敌人基类
-class_name BaseEnemy
 
 signal enemy_died(enemy)
 

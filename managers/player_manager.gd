@@ -1,6 +1,8 @@
-# 包含和玩家角色相关的全局逻辑
-
 extends Node
+
+"""
+包含和玩家角色相关的全局逻辑
+"""
 
 var main_node: Node
 var player_character: PlayerCharacter

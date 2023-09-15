@@ -1,9 +1,8 @@
-extends Node2D
+class_name BaseWeapon extends Node2D
 
 # 武器基类
-class_name BaseWeapon
 
-# 发射物类
+# 武器的发射物类
 export var projectile_scene: PackedScene
 var main_node: Node
 

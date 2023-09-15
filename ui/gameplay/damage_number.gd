@@ -1,6 +1,5 @@
-extends Node2D
+class_name DamageNumber extends Node2D
 
-class_name DamageNumber
 
 var number: float = 999.0
 var duration: float = 1.0

@@ -4,11 +4,11 @@ extends Node
 
 # 所有敌人
 var debug_enemy_class: PackedScene
-var main_scene: Node
+var main_node: Node
 var player_character: Node2D
 
 func _ready():
-	main_scene = get_parent().get_node("Main")
+	main_node = get_parent().get_node("Main")
 	debug_enemy_class = load("res://characters/enemies/debug_enemy/debug_enemy.tscn")
 
 # 获取最近敌人的位置
@@ -37,5 +37,5 @@ func _on_EnemySpawning_timeout() -> void:
 	enemy.global_position = PlayerManager.player_position + relative_position
 	enemy.global_rotation = randf() * 2 * PI
 	
-	main_scene.add_child(enemy)
+	main_node.add_child(enemy)
 	enemy.add_to_group("enemies")
