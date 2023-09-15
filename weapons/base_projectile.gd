@@ -1,6 +1,5 @@
-extends Area2D
+class_name BaseProjectile extends Area2D
 
-class_name BaseProjectile
 
 # 伤害、范围、飞行速度、持续时间、穿透敌人
 var damage: float = 10.0

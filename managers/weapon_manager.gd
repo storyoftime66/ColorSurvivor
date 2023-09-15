@@ -6,14 +6,8 @@ var player_character: PlayerCharacter
 var player_bonus: Dictionary = {}
 var weapons: Dictionary = {}
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	main_node = get_parent().get_node("Main")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func obtain_weapon(wepaon_scene: PackedScene) -> void:
 	if weapons.has(wepaon_scene):

@@ -1,7 +1,7 @@
-extends BaseWeapon
+class_name MagicMissle extends BaseWeapon
 
 # 魔法弹，朝最近的敌人发射一枚飞弹
-class_name MagicMissle
+
 
 func _ready():
 	._ready()

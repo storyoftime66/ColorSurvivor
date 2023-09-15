@@ -1,15 +1,15 @@
-extends BaseWeapon
+class_name Onion extends BaseWeapon
 
 # 洋葱，对角色附近敌人周期性造成伤害
-class_name Onion
+
 
 # 在范围内的敌人
 var enemies_in_range: Array = []
 
 func _ready():
 	._ready()
-	($DamageArea/CollisionShape2D.shape as CircleShape2D).radius = area * 16
-	$Sprite.scale = Vector2(area * 0.1808, area * 0.1808)
+	($DamageArea/CollisionShape2D.shape as CircleShape2D).radius = attributes["area"].value * 16
+	$Sprite.scale = Vector2(attributes["area"].value * 0.1808, attributes["area"].value * 0.1808)
 	
 # 进行射击
 func _on_ShootingTimer_timeout():
