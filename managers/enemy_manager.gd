@@ -19,10 +19,10 @@ func get_closest_enemy_position() -> Vector2:
 	var player_position = PlayerManager.player_position
 	var temp_distance_square: float
 	for enemy in enemies:
-		temp_distance_square = enemy.global_position.distance_squared_to(player_position)
+		temp_distance_square = enemy.position.distance_squared_to(player_position)
 		if closest_distance_square > temp_distance_square:
 			closest_distance_square = temp_distance_square
-			closest_pos = enemy.global_position
+			closest_pos = enemy.position
 	return closest_pos
 
 #func _process(delta):
@@ -34,8 +34,8 @@ func _on_EnemySpawning_timeout() -> void:
 	var angle = randf() * 2 * PI
 	var relative_position = Vector2(cos(angle) * 800, sin(angle) * 800)
 	# 在玩家屏幕外生成，随机旋转
-	enemy.global_position = PlayerManager.player_position + relative_position
-	enemy.global_rotation = randf() * 2 * PI
+	enemy.position = PlayerManager.player_position + relative_position
+	enemy.rotation = randf() * 2 * PI
 	
 	main_node.add_child(enemy)
 	enemy.add_to_group("enemies")

@@ -15,9 +15,9 @@ func _ready():
 func _on_ShootingTimer_timeout():
 	for enemy in enemies_in_range:
 		if is_instance_valid(enemy):
-			var impact_impulse = (enemy.global_position - PlayerManager.player_position).normalized() * impact
+			var impact_impulse = (enemy.position - PlayerManager.player_position).normalized() * impact
 			var actual_damage = (enemy as BaseEnemy).take_damage(damage, impact_impulse)
-			PlayerManager.spawn_damage_number(enemy.global_position, actual_damage)
+			PlayerManager.spawn_damage_number(enemy.position, actual_damage)
 
 func _on_DamageArea_body_entered(body):
 	var enemy = body as BaseEnemy

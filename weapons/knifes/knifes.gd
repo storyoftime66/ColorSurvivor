@@ -6,5 +6,5 @@ func _ready():
 	._ready()
 	projectile_scene = preload("res://weapons/knifes/knife_projectile.tscn")
 
-func get_target_position() -> Vector2:
-	return global_position + Vector2.RIGHT.rotated(PlayerManager.player_orientation)
+func get_projectile_rot() -> float:
+	return PlayerManager.player_orientation

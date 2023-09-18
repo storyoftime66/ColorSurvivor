@@ -28,9 +28,9 @@ func _on_LifeSpan_timeout():
 func _on_hit(body):
 	var enemy = body as BaseEnemy
 	if enemy != null:
-		var impact_impulse = Vector2(1.0, 0.0).rotated(global_rotation) * impact
+		var impact_impulse = Vector2(1.0, 0.0).rotated(rotation) * impact
 		var actual_damage = enemy.take_damage(damage, impact_impulse)
-		PlayerManager.spawn_damage_number(enemy.global_position, actual_damage)
+		PlayerManager.spawn_damage_number(enemy.position, actual_damage)
 	penetration -= 1
 	if penetration == 0:
 		destroy()
