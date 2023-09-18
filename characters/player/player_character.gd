@@ -7,7 +7,7 @@ class_name PlayerCharacter extends KinematicBody2D
 
 # 玩家属性
 # 移动速度，单位像素/秒
-export var move_speed := 300.0
+export var move_speed := 200.0
 # 防御力，减少每次受击承受的伤害
 export var armor := 1.0
 # 最大生命值
@@ -44,7 +44,8 @@ func _physics_process(delta):
 		movement_input.y -= 1
 	if Input.is_action_pressed("move_down"):
 		movement_input.y += 1
-	var velocity = move_and_slide(movement_input.normalized() * attributes["move_speed"].value)
+	var movement_direction = movement_input.normalized()
+	var velocity = move_and_slide(movement_direction * attributes["move_speed"].value)
 	
 # TODO: 受到伤害，返回实际受到的伤害
 func take_damage(damage_amount: float) -> float:

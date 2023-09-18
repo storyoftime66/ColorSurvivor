@@ -14,11 +14,10 @@ var player: PlayerCharacter
 # 敌人移动推力的大小
 var speed_force_length := 0.0
 
+
 func _ready():
 	speed_force_length = speed * mass * linear_damp
 
-#func _physics_process(delta):
-#	apply_central_impulse((PlayerManager.player_position - global_position).normalized() * movement_speed)
 
 # 受到伤害，返回实际受到的伤害值
 func take_damage(damage: float, impact: Vector2 = Vector2.ZERO) -> float:
@@ -29,23 +28,28 @@ func take_damage(damage: float, impact: Vector2 = Vector2.ZERO) -> float:
 		apply_central_impulse(impact)
 	return damage
 
+
 # 死亡
 func die():
 	emit_signal("enemy_died", self)
 	queue_free()
 
+
 # 对玩家造成伤害
 func _on_AttackRange_body_entered(body):
 	player = body as PlayerCharacter
 	$AttackTimer.start()
-	
+
+
 func _on_AttackRange_body_exited(_body):
 	player = null
 	$AttackTimer.stop()
+
 
 func _on_AttackTimer_timeout() -> void:
 	if is_instance_valid(player):
 		player.take_damage(attack_damage)
 
+
 func _on_MovementTimer_timeout() -> void:
-	applied_force = (PlayerManager.player_position - global_position).normalized() * speed_force_length
+	applied_force = (PlayerManager.player_position - position).normalized() * speed_force_length

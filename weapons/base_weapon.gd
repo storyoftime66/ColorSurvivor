@@ -59,28 +59,38 @@ func create_projectile() -> BaseProjectile:
 	
 	return projectile
 
+
 # 构造发射物并添加到场景中
-func spawn_projectile(target_pos: Vector2) -> void:
+func spawn_projectile() -> void:
 	var projectile = create_projectile()
 	
 	main_node.add_child(projectile)
-	projectile.global_position = global_position
-	projectile.look_at(target_pos)
+	# 武器在玩家角色身上，需要计算武器在Main中的位置
+	projectile.position = get_projectile_pos()
+	projectile.rotation = get_projectile_rot()
 
-# 获取发射物的目标点，通常子类需要重写
-func get_target_position() -> Vector2:
-	return global_position + Vector2(1, 0)
+
+# 获取发射物的生成位置，通常子类需要重写
+func get_projectile_pos() -> Vector2:
+	return position + PlayerManager.player_position
+
+
+# 获取发射物的生成旋转，通常子类需要重写
+func get_projectile_rot() -> float:
+	return rotation + PlayerManager.player_orientation
+
 
 # 进行射击
 func _on_ShootingTimer_timeout():
 	remaining_amount = int(attributes["amount"].value)
 	$ShootingIntervalTimer.start(shooting_interval)
 
+
 # 单发射击（子类通常需要重载这个方法来实现自己的射击效果）
 func _on_ShootingIntervalTimer_timeout():
 	remaining_amount -= 1
 	if remaining_amount >= 0:
-		spawn_projectile(get_target_position())
+		spawn_projectile()
 	else:
 		$ShootingIntervalTimer.stop()
 		$ShootingTimer.start(cooldown)

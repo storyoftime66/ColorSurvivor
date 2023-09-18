@@ -20,7 +20,7 @@ func _ready():
 #	pass
 
 #func _physics_process(delta):
-#	applied_force = (PlayerManager.player_position - global_position).normalized() * 500
+#	applied_force = (PlayerManager.player_position - position).normalized() * 500
 #	pass
 
 #func _integrate_forces(state: Physics2DDirectBodyState):
@@ -38,5 +38,5 @@ func _on_RigidBody2D_input_event(viewport, event: InputEvent, shape_idx):
 
 
 func _on_Timer_timeout():
-	applied_force = (PlayerManager.player_position - global_position).normalized() * 500
+	applied_force = (PlayerManager.player_position - position).normalized() * 500
 	print(linear_velocity.length())
