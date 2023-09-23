@@ -7,9 +7,9 @@ class_name Onion extends BaseWeapon
 var enemies_in_range: Array = []
 
 func _ready():
-	._ready()
+	super._ready()
 	($DamageArea/CollisionShape2D.shape as CircleShape2D).radius = attributes["area"].value * 16
-	$Sprite.scale = Vector2(attributes["area"].value * 0.1808, attributes["area"].value * 0.1808)
+	$Sprite2D.scale = Vector2(attributes["area"].value * 0.1808, attributes["area"].value * 0.1808)
 	
 # 进行射击
 func _on_ShootingTimer_timeout():

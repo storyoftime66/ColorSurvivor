@@ -1,4 +1,2 @@
-extends BaseProjectile
-
-class_name KnifeProjectile
+class_name KnifeProjectile extends BaseProjectile
 

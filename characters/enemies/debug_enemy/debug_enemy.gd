@@ -1,3 +1,1 @@
-extends BaseEnemy
-
-class_name DebugEnemy
+class_name DebugEnemy extends BaseEnemy

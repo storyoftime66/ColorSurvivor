@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://weapons/base_projectile.tscn" type="PackedScene" id=1]
-[ext_resource path="res://weapons/magic_missle/magic_missle_projectile.svg" type="Texture" id=2]
+[ext_resource path="res://weapons/magic_missle/magic_missle_projectile.svg" type="Texture2D" id=2]
 [ext_resource path="res://weapons/magic_missle/magic_missle_projectile.gd" type="Script" id=3]
 
 [node name="MagicMissleProjectile" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="." index="2"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
 rotation = -1.5708
 scale = Vector2( 0.5, 0.5 )
 z_index = 1

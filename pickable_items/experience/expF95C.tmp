@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1bdwwdgac3to"]
+
+[ext_resource type="Texture2D" uid="uid://vc6q8qwg3jcm" path="res://pickable_items/experience/experience.svg" id="1"]
+[ext_resource type="PackedScene" uid="uid://dkuty6fww25x8" path="res://pickable_items/base_pickable_item.tscn" id="2"]
+[ext_resource type="Script" path="res://pickable_items/experience/experience.gd" id="3"]
+
+[node name="Experience" instance=ExtResource("2")]
+script = ExtResource("3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1")

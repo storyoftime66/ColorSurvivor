@@ -4,7 +4,7 @@ class_name MagicMissle extends BaseWeapon
 
 
 func _ready():
-	._ready()
+	super._ready()
 	projectile_scene = preload("res://weapons/magic_missle/magic_missle_projectile.tscn")
 	
 func get_projectile_rot() -> float:
