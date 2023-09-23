@@ -1,40 +1,34 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://52hu2acvry6v"]
 
-[ext_resource path="res://characters/enemies/base_enemy.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://characters/enemies/base_enemy.gd" id="1"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id="1"]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 radius = 20.025
 
 [node name="Enemy" type="RigidBody2D"]
 gravity_scale = 0.0
 linear_damp = 5.0
 angular_damp = 5.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="BodyCollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="AttackRange" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
-__meta__ = {
-"_editor_description_": "攻击间隔计时器"
-}
 
 [node name="MovementTimer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
-__meta__ = {
-"_editor_description_": "移动推力改变计时器"
-}
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_AttackRange_body_exited"]
