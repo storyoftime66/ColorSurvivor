@@ -7,13 +7,13 @@ class Attribute:
 	signal value_changed
 	
 	# 属性值，current_value的别名
-	var value: float setget , get_value
+	var value: float: get = get_value
 	
-	var base_value: float setget set_base_value, get_base_value
-	var current_value: float setget , get_value
-	var addition: float = 0.0 setget set_addition, get_addition
-	var multiplier: float = 0.0 setget set_multiplier, get_multiplier
-	var divider: float = 0.0 setget set_divider, get_divider
+	var base_value: float: get = get_base_value, set = set_base_value
+	var current_value: float: get = get_value
+	var addition: float = 0.0: get = get_addition, set = set_addition
+	var multiplier: float = 0.0: get = get_multiplier, set = set_multiplier
+	var divider: float = 0.0: get = get_divider, set = set_divider
 	var is_dirty: bool = true
 	
 	func get_value() -> float:

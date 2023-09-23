@@ -3,13 +3,13 @@
 extends Node
 
 # 所有敌人
-var debug_enemy_class: PackedScene
-var main_node: Node
-var player_character: Node2D
+var debug_enemy_scene: PackedScene
+var level_node: Node
+var experience_scene: PackedScene = preload("res://pickable_items/experience/experience.tscn")
 
 func _ready():
-	main_node = get_parent().get_node("Main")
-	debug_enemy_class = load("res://characters/enemies/debug_enemy/debug_enemy.tscn")
+	level_node = get_parent().get_node("Main")
+	debug_enemy_scene = load("res://characters/enemies/debug_enemy/debug_enemy.tscn")
 
 # 获取最近敌人的位置
 func get_closest_enemy_position() -> Vector2:
@@ -24,18 +24,22 @@ func get_closest_enemy_position() -> Vector2:
 			closest_distance_square = temp_distance_square
 			closest_pos = enemy.position
 	return closest_pos
-
-#func _process(delta):
-#	pass
+	
 
 # 生成敌人
 func _on_EnemySpawning_timeout() -> void:
-	var enemy = debug_enemy_class.instance()
+	var enemy = debug_enemy_scene.instantiate()
 	var angle = randf() * 2 * PI
 	var relative_position = Vector2(cos(angle) * 800, sin(angle) * 800)
 	# 在玩家屏幕外生成，随机旋转
 	enemy.position = PlayerManager.player_position + relative_position
 	enemy.rotation = randf() * 2 * PI
 	
-	main_node.add_child(enemy)
+	level_node.add_child(enemy)
 	enemy.add_to_group("enemies")
+
+func spawn_experience(experience_amount: float, pos: Vector2) -> void:
+	var experience = experience_scene.instantiate() as Experience
+	experience.amount = experience_amount
+	experience.position = pos
+	level_node.add_child(experience)

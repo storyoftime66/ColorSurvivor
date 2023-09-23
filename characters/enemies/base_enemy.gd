@@ -5,9 +5,10 @@ class_name BaseEnemy extends RigidBody2D
 signal enemy_died(enemy)
 
 # 属性：攻击伤害、移动速度、血量
-export var attack_damage: float = 5.0
-export var speed: float = 100.0
-export var health: float = 10.0
+@export var attack_damage: float = 5.0
+@export var speed: float = 100.0
+@export var health: float = 10.0
+@export var experience_amount: float = 10.0
 
 # 状态
 var player: PlayerCharacter
@@ -32,6 +33,7 @@ func take_damage(damage: float, impact: Vector2 = Vector2.ZERO) -> float:
 # 死亡
 func die():
 	emit_signal("enemy_died", self)
+	EnemyManager.spawn_experience(experience_amount, position)
 	queue_free()
 
 
@@ -52,4 +54,5 @@ func _on_AttackTimer_timeout() -> void:
 
 
 func _on_MovementTimer_timeout() -> void:
-	applied_force = (PlayerManager.player_position - position).normalized() * speed_force_length
+	# TODO: 优化移动方式
+	constant_force = (PlayerManager.player_position - position).normalized() * speed_force_length
