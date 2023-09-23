@@ -42,4 +42,5 @@ func spawn_experience(experience_amount: float, pos: Vector2) -> void:
 	var experience = experience_scene.instantiate() as Experience
 	experience.amount = experience_amount
 	experience.position = pos
-	level_node.add_child(experience)
+#	level_node.add_child(experience)
+	level_node.call_deferred("add_child", experience)

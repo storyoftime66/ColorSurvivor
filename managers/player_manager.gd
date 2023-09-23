@@ -15,7 +15,7 @@ var player_position: Vector2 = Vector2(0, 0)
 var player_orientation: float = 0.0
 var player_experience: float = 0.0
 var player_level: int = 1
-var player_level_experience_table = [10.0, 80.0, 640.0, 1600.0, 2880.0]
+var player_level_experience_table = [10.0, 80.0, 240, 640.0, 1600.0, 2880.0]
 
 
 func _ready():
@@ -29,8 +29,8 @@ func _ready():
 	
 	# 赋予初始武器
 	WeaponManager.obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
-#	WeaponManager.obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
-#	WeaponManager.obtain_weapon(load("res://weapons/onion/onion.tscn"))
+	WeaponManager.obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
+	WeaponManager.obtain_weapon(load("res://weapons/onion/onion.tscn"))
 
 
 # 更新玩家状态
@@ -66,4 +66,4 @@ func player_gain_experience(experience_amount: float) -> void:
 
 func player_upgrade():
 	player_level += 1
-	emit_signal("player_upgrade", player_level)
+	emit_signal("player_upgraded", player_level)

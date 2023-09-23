@@ -8,6 +8,7 @@ signal enemy_died(enemy)
 @export var attack_damage: float = 5.0
 @export var speed: float = 100.0
 @export var health: float = 10.0
+@export var weight: float = 1.0
 @export var experience_amount: float = 10.0
 
 # 状态
@@ -17,7 +18,8 @@ var speed_force_length := 0.0
 
 
 func _ready():
-	speed_force_length = speed * mass * linear_damp
+	speed_force_length = speed * weight * linear_damp
+	mass = weight
 
 
 # 受到伤害，返回实际受到的伤害值

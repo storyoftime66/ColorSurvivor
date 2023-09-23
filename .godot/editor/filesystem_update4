@@ -12,3 +12,4 @@ res://pickable_items/experience/experience.tscn
 res://pickable_items/experience/experience.gd
 res://characters/enemies/base_enemy.gd
 res://weapons/base_weapon.gd
+res://characters/enemies/base_enemy.tscn
