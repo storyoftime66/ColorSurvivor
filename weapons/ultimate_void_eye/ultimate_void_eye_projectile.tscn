@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh56ah10pachl"]
+
+[ext_resource type="PackedScene" uid="uid://blcmj0lwnl5fu" path="res://weapons/base_projectile.tscn" id="1_e82jl"]
+[ext_resource type="Script" path="res://weapons/ultimate_void_eye/ultimate_void_eye_projectile.gd" id="2_6k85h"]
+
+[node name="UltimateVoidEyeProjectile" instance=ExtResource("1_e82jl")]
+script = ExtResource("2_6k85h")
+
+[node name="LifeSpan" parent="." index="1"]
+one_shot = false

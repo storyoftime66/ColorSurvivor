@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://bctjb4smt8c0q"]
+
+[ext_resource type="Script" path="res://ui/hud/main_hud.gd" id="1_4ghpy"]
+
+[node name="MainHud" type="CanvasLayer"]
+script = ExtResource("1_4ghpy")
+
+[node name="ExperienceBar" type="ProgressBar" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 18.0
+grow_horizontal = 2
+mouse_force_pass_scroll_events = false
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="LevelDisplayText" type="Label" parent="ExperienceBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_top = -3.0
+offset_right = -4.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Lv. 1
+"
+horizontal_alignment = 2
