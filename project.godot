@@ -19,7 +19,7 @@ config/icon="res://icon.png"
 
 PlayerManager="*res://managers/player_manager.gd"
 EnemyManager="*res://managers/enemy_manager.tscn"
-WeaponManager="*res://managers/weapon_manager.gd"
+HUD="*res://ui/hud/main_hud.tscn"
 
 [display]
 

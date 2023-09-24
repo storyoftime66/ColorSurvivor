@@ -2,20 +2,38 @@ extends Node
 ## 包含和玩家、玩家角色相关的全局逻辑
 
 
-# 玩家升级
-signal player_upgraded(level);
+signal player_level_up(new_level)
+signal player_experience_changed(new_experience)
 
 var level_node: Node
+
+# 玩家角色
 var player_character: PlayerCharacter
 var player_character_scene: PackedScene = preload("res://characters/player/player_character.tscn")
 var damage_number_scene: PackedScene = preload("res://ui/gameplay/damage_number.tscn")
 
-# 玩家状态
+# 玩家角色状态
 var player_position: Vector2 = Vector2(0, 0)
 var player_orientation: float = 0.0
-var player_experience: float = 0.0
-var player_level: int = 1
+
 var player_level_experience_table = [10.0, 80.0, 240, 640.0, 1600.0, 2880.0]
+var player_experience: float = 0.0:
+	get:
+		return player_experience
+	set(value):
+		if player_experience != value:
+			player_experience = value
+			emit_signal("player_experience_changed", player_experience)
+var player_max_experience: float:
+	get:
+		return player_level_experience_table[player_level - 1]
+var player_level: int = 1:
+	get:
+		return player_level
+	set(value):
+		while value > player_level:
+			player_level += 1
+			emit_signal("player_level_up", player_level)
 
 
 func _ready():
@@ -28,15 +46,13 @@ func _ready():
 	player_character.position = player_character.get_viewport_rect().size * 0.5
 	
 	# 赋予初始武器
-	WeaponManager.obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
-	WeaponManager.obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
-	WeaponManager.obtain_weapon(load("res://weapons/onion/onion.tscn"))
+	obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
+	obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
+	obtain_weapon(load("res://weapons/onion/onion.tscn"))
 
 
-# 更新玩家状态
 func _process(delta):
-	print(player_level)	
-	
+	# 更新玩家角色状态
 	if is_instance_valid(player_character):
 		player_position = player_character.position
 		
@@ -59,11 +75,23 @@ func player_gain_experience(experience_amount: float) -> void:
 		return
 		
 	player_experience += experience_amount
-	while player_experience >= player_level_experience_table[player_level - 1]:
-		player_experience -= player_level_experience_table[player_level - 1]
-		player_upgrade()
-	
+	while player_experience >= player_max_experience:
+		player_experience -= player_max_experience
+		player_level += 1
 
-func player_upgrade():
-	player_level += 1
-	emit_signal("player_upgraded", player_level)
+
+# 武器相关
+var player_bonus: Dictionary = {}
+var weapons: Dictionary = {}
+
+func obtain_weapon(wepaon_scene: PackedScene) -> void:
+	if weapons.has(wepaon_scene):
+		weapons[wepaon_scene].upgrade()
+	else:
+		var weapon = wepaon_scene.instantiate() as BaseWeapon
+		weapon.apply_bonus(player_bonus)
+		
+		var player_character = PlayerManager.player_character
+		weapons[wepaon_scene] = weapon
+		player_character.add_child(weapon)
+		weapon.owner = player_character

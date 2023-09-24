@@ -1,10 +1,10 @@
 class_name BaseWeapon extends Node2D
+## 武器基类
 
-# 武器基类
 
 # 武器的发射物类
 @export var projectile_scene: PackedScene
-var level_node: Node
+@onready var level_node := PlayerManager.level_node
 
 # 伤害、范围、发射物飞行速度、发射物持续时间、发射物数量、冷却时间、冲击力
 @export var damage: float = 10.0
@@ -26,9 +26,8 @@ var attributes: Dictionary = {}
 # 单次发射中剩余未发射的数量
 var remaining_amount: int = 0
 
+
 func _ready():
-	level_node = WeaponManager.level_node
-	
 	# 初始化属性
 	attributes["damage"] = CommonTypes.Attribute.new(damage)
 	attributes["area"] = CommonTypes.Attribute.new(area)
@@ -41,11 +40,13 @@ func _ready():
 	
 	$ShootingTimer.start(attributes["cooldown"].value)
 
+
 # 应用角色的增益
 func apply_bonus(bonus: Dictionary) -> void:
 	for key in attributes.keys():
 		if bonus[key] is CommonTypes.Attribute:
 			attributes[key].add_modifiers(bonus[key])
+
 
 # 构造发射物
 func create_projectile() -> BaseProjectile:
@@ -56,28 +57,26 @@ func create_projectile() -> BaseProjectile:
 	projectile.duration = attributes["duration"].value
 	projectile.penetration = int(attributes["penetration"].value)
 	projectile.impact = attributes["impact"].value
-	
 	return projectile
 
 
 # 构造发射物并添加到场景中
 func spawn_projectile() -> void:
 	var projectile = create_projectile()
-	
-	level_node.add_child(projectile)
-	# 武器在玩家角色身上，需要计算武器在Main中的位置
-	projectile.position = get_projectile_pos()
-	projectile.rotation = get_projectile_rot()
+	projectile.top_level = true
+	add_child(projectile)
+	projectile.global_position = get_projectile_pos()
+	projectile.global_rotation = get_projectile_rot()
 
 
 # 获取发射物的生成位置，通常子类需要重写
 func get_projectile_pos() -> Vector2:
-	return position + PlayerManager.player_position
+	return global_position
 
 
 # 获取发射物的生成旋转，通常子类需要重写
 func get_projectile_rot() -> float:
-	return rotation + PlayerManager.player_orientation
+	return global_rotation
 
 
 # 进行射击
@@ -95,6 +94,7 @@ func _on_ShootingIntervalTimer_timeout():
 		$ShootingIntervalTimer.stop()
 		$ShootingTimer.start(cooldown)
 
+
 # 升级
 func upgrade() -> void:
-	pass
+	print("%s.upgrade() has NOT been implemented" % self)

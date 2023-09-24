@@ -1,3 +1,1 @@
-extends BaseProjectile
-
-class_name MagicMissleProjectile
+class_name MagicMissleProjectile extends BaseProjectile

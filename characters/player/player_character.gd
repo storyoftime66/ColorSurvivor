@@ -10,7 +10,7 @@ signal player_character_health_changed(new_health)
 # 防御力，减少每次受击承受的伤害
 @export var armor := 1.0
 # 最大生命值
-@export var max_health := 20.0
+@export var max_health := 100.0
 # 拾取范围，单位像素
 @export var magnet := 80.0
 
