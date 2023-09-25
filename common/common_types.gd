@@ -54,12 +54,19 @@ class Attribute:
 	func get_divider() -> float:
 		return divider
 	
-	func add_modifiers(other: Attribute) -> void:
+	func apply_modifiers(other: Attribute) -> void:
 		addition += other.addition
 		multiplier += other.multiplier
 		divider += other.divider
 		is_dirty = true
 		emit_signal("value_changed", value)
+	
+	func new_from_modifiers(other: Attribute) -> Attribute:
+		var new_attribute = Attribute.new(base_value)
+		new_attribute.addition = addition + other.addition
+		new_attribute.multiplier = multiplier + other.multiplier
+		new_attribute.divider = divider + other.divider
+		return new_attribute
 	
 	func reset() -> void:
 		addition = 0.0

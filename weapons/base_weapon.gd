@@ -20,33 +20,51 @@ class_name BaseWeapon extends Node2D
 const shooting_interval: float = 0.05
 
 # 武器属性，类型: Dictionary[str, Attribute]
+var weapon_attributes: Dictionary = {}
+# 经过角色增益后的武器属性
 var attributes: Dictionary = {}
 
 # 武器状态
 # 单次发射中剩余未发射的数量
 var remaining_amount: int = 0
+var player_character: PlayerCharacter
 
 
 func _ready():
 	# 初始化属性
-	attributes["damage"] = CommonTypes.Attribute.new(damage)
-	attributes["area"] = CommonTypes.Attribute.new(area)
-	attributes["speed"] = CommonTypes.Attribute.new(speed)
-	attributes["duration"] = CommonTypes.Attribute.new(duration)
-	attributes["amount"] = CommonTypes.Attribute.new(amount)
-	attributes["cooldown"] = CommonTypes.Attribute.new(cooldown)
-	attributes["penetration"] = CommonTypes.Attribute.new(penetration)
-	attributes["impact"] = CommonTypes.Attribute.new(impact)
+	weapon_attributes["damage"] = CommonTypes.Attribute.new(damage)
+	weapon_attributes["area"] = CommonTypes.Attribute.new(area)
+	weapon_attributes["speed"] = CommonTypes.Attribute.new(speed)
+	weapon_attributes["duration"] = CommonTypes.Attribute.new(duration)
+	weapon_attributes["amount"] = CommonTypes.Attribute.new(amount)
+	weapon_attributes["cooldown"] = CommonTypes.Attribute.new(cooldown)
+	weapon_attributes["penetration"] = CommonTypes.Attribute.new(penetration)
+	weapon_attributes["impact"] = CommonTypes.Attribute.new(impact)
+	
+	player_character = owner as PlayerCharacter
+	attributes = weapon_attributes.duplicate(true)
+	apply_all_player_bonus()
 	
 	$ShootingTimer.start(attributes["cooldown"].value)
 
 
 # 应用角色的增益
-func apply_bonus(bonus: Dictionary) -> void:
-	for key in attributes.keys():
-		if bonus[key] is CommonTypes.Attribute:
-			attributes[key].add_modifiers(bonus[key])
+func apply_bonus(attribute_name: String, bonus: CommonTypes.Attribute) -> void:
+	attributes[attribute_name] = weapon_attributes[attribute_name].new_from_modifiers(bonus)
+	
+# 应用角色的所有增益
+func apply_all_bonus(bonus_dict: Dictionary) -> void:
+	for key in weapon_attributes.keys():
+		if bonus_dict.has(key) and bonus_dict[key] is CommonTypes.Attribute:
+			attributes[key] = weapon_attributes[key].new_from_modifiers(bonus_dict[key])
 
+# 应用玩家角色的增益
+func apply_player_bonus(attribute_name: String) -> void:
+	apply_bonus(attribute_name, player_character.attributes[attribute_name])
+	
+# 应用角色的所有增益
+func apply_all_player_bonus() -> void:
+	apply_all_bonus(player_character.attributes)
 
 # 构造发射物
 func create_projectile() -> BaseProjectile:
