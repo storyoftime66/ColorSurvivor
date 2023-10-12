@@ -32,16 +32,29 @@ var health :float:
 var screen_size: Vector2
 
 func _ready():
+	# 角色自身属性
 	attributes["move_speed"] = CommonTypes.Attribute.new(move_speed)
 	attributes["armor"] = CommonTypes.Attribute.new(armor)
 	attributes["max_health"] = CommonTypes.Attribute.new(max_health)
 	attributes["magnet"] = CommonTypes.Attribute.new(magnet)
+	
+	# 角色对武器的增益
+	attributes["damage"] = CommonTypes.Attribute.new(0.0)
+	attributes["area"] = CommonTypes.Attribute.new(0.0)
+	attributes["speed"] = CommonTypes.Attribute.new(0.0)
+	attributes["duration"] = CommonTypes.Attribute.new(0.0)
+	attributes["amount"] = CommonTypes.Attribute.new(0.0)
+	attributes["cooldown"] = CommonTypes.Attribute.new(0.0)
+	attributes["penetration"] = CommonTypes.Attribute.new(0.0)
+	attributes["impact"] = CommonTypes.Attribute.new(0.0)
 	
 	health = max_health
 	
 	($PickupRange/PickupRangeShape.shape as CircleShape2D).radius = attributes["magnet"].value
 	
 	screen_size = get_viewport_rect().size
+	print("PlayerCharacter Ready")
+	
 
 # 移动输入处理
 func _physics_process(delta):

@@ -44,11 +44,14 @@ func _ready():
 	player_character = player_character_scene.instantiate()
 	level_node.add_child(player_character)
 	player_character.position = player_character.get_viewport_rect().size * 0.5
-	
+	call_deferred("initialize_weapons")
+
+func initialize_weapons() -> void:
 	# 赋予初始武器
 	obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
 	obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
 	obtain_weapon(load("res://weapons/onion/onion.tscn"))
+	obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
 
 
 func _process(delta):
@@ -94,5 +97,6 @@ func obtain_weapon(wepaon_scene: PackedScene) -> void:
 		
 		var player_character = PlayerManager.player_character
 		weapons[wepaon_scene] = weapon
+		weapon.player_character = player_character
 		player_character.add_child(weapon)
 		weapon.owner = player_character
