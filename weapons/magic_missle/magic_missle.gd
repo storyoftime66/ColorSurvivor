@@ -4,8 +4,9 @@ class_name MagicMissle extends BaseWeapon
 
 
 func _ready():
-	super._ready()
 	projectile_scene = preload("res://weapons/magic_missle/magic_missle_projectile.tscn")
+	super._ready()
+	
 	
 func get_projectile_rot() -> float:
 	return PlayerManager.player_position.angle_to_point(EnemyManager.get_closest_enemy_position())

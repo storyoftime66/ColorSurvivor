@@ -3,7 +3,7 @@ class_name BaseWeapon extends Node2D
 
 
 # 武器的发射物类
-@export var projectile_scene: PackedScene
+var projectile_scene: PackedScene
 @onready var level_node := PlayerManager.level_node
 
 # 伤害、范围、发射物飞行速度、发射物持续时间、发射物数量、冷却时间、冲击力
@@ -19,7 +19,7 @@ class_name BaseWeapon extends Node2D
 # 连续射击时的射击间隔
 const shooting_interval: float = 0.05
 
-# 武器属性，类型: Dictionary[str, Attribute]
+# 武器基本属性，类型: Dictionary[str, Attribute]
 var weapon_attributes: Dictionary = {}
 # 经过角色增益后的武器属性
 var attributes: Dictionary = {}
@@ -41,22 +41,23 @@ func _ready():
 	weapon_attributes["penetration"] = CommonTypes.Attribute.new(penetration)
 	weapon_attributes["impact"] = CommonTypes.Attribute.new(impact)
 	
-	player_character = owner as PlayerCharacter
+	assert(player_character != null)
 	attributes = weapon_attributes.duplicate(true)
 	apply_all_player_bonus()
 	
 	$ShootingTimer.start(attributes["cooldown"].value)
 
 
-# 应用角色的增益
+# 应用增益
 func apply_bonus(attribute_name: String, bonus: CommonTypes.Attribute) -> void:
-	attributes[attribute_name] = weapon_attributes[attribute_name].new_from_modifiers(bonus)
+	attributes[attribute_name] = weapon_attributes[attribute_name].duplicate_and_apply_modifier(bonus)
 	
-# 应用角色的所有增益
+# 应用所有增益
 func apply_all_bonus(bonus_dict: Dictionary) -> void:
 	for key in weapon_attributes.keys():
 		if bonus_dict.has(key) and bonus_dict[key] is CommonTypes.Attribute:
-			attributes[key] = weapon_attributes[key].new_from_modifiers(bonus_dict[key])
+			apply_bonus(key, bonus_dict[key])
+
 
 # 应用玩家角色的增益
 func apply_player_bonus(attribute_name: String) -> void:

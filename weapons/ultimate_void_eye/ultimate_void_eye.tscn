@@ -5,3 +5,8 @@
 
 [node name="UltimateVoidEye" instance=ExtResource("1_ew2xa")]
 script = ExtResource("2_ox8b8")
+speed = 100.0
+amount = 5
+
+[node name="ShootingTimer" parent="." index="0"]
+one_shot = false
