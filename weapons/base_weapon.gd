@@ -5,6 +5,8 @@ class_name BaseWeapon extends Node2D
 # 武器的发射物类
 var projectile_scene: PackedScene
 @onready var level_node := PlayerManager.level_node
+@onready var shooting_timer := $ShootingTimer as Timer
+@onready var shooting_interval_timer := $ShootingIntervalTimer as Timer
 
 # 伤害、范围、发射物飞行速度、发射物持续时间、发射物数量、冷却时间、冲击力
 @export var damage: float = 10.0
@@ -16,8 +18,8 @@ var projectile_scene: PackedScene
 @export var penetration: int = 1
 @export var impact: float = 500.0
 
-# 连续射击时的射击间隔
-const shooting_interval: float = 0.05
+# 连续射击时的射击间隔，通常为常数
+var shooting_interval: float = 0.05
 
 # 武器基本属性，类型: Dictionary[str, Attribute]
 var weapon_attributes: Dictionary = {}
@@ -45,7 +47,7 @@ func _ready():
 	attributes = weapon_attributes.duplicate(true)
 	apply_all_player_bonus()
 	
-	$ShootingTimer.start(attributes["cooldown"].value)
+	shooting_timer.start(attributes["cooldown"].value)
 
 
 # 应用增益
@@ -99,19 +101,21 @@ func get_projectile_rot() -> float:
 
 
 # 进行射击
-func _on_ShootingTimer_timeout():
+func shoot() -> void:
 	remaining_amount = int(attributes["amount"].value)
-	$ShootingIntervalTimer.start(shooting_interval)
+	shooting_interval_timer.start(shooting_interval)
+	
+	var interval_between_shots = attributes["cooldown"].value + attributes["amount"].value * shooting_interval
+	shooting_timer.start(interval_between_shots)
 
 
 # 单发射击（子类通常需要重载这个方法来实现自己的射击效果）
-func _on_ShootingIntervalTimer_timeout():
+func shoot_single_projectile() -> void:
 	remaining_amount -= 1
 	if remaining_amount >= 0:
 		spawn_projectile()
 	else:
-		$ShootingIntervalTimer.stop()
-		$ShootingTimer.start(cooldown)
+		shooting_interval_timer.stop()
 
 
 # 升级

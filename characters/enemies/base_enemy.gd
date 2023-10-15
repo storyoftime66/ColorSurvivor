@@ -9,7 +9,9 @@ signal enemy_died(enemy)
 @export var speed: float = 100.0
 @export var health: float = 10.0
 @export var weight: float = 1.0
-@export var experience_amount: float = 10.0
+@export var experience_amount: float = 1.0
+
+@onready var attack_timer := $AttackTimer as Timer
 
 # 状态
 var player: PlayerCharacter
@@ -42,12 +44,12 @@ func die():
 # 对玩家造成伤害
 func _on_AttackRange_body_entered(body):
 	player = body as PlayerCharacter
-	$AttackTimer.start()
+	attack_timer.start()
 
 
 func _on_AttackRange_body_exited(_body):
 	player = null
-	$AttackTimer.stop()
+	attack_timer.stop()
 
 
 func _on_AttackTimer_timeout() -> void:
