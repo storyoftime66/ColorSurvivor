@@ -16,7 +16,6 @@ var damage_number_scene: PackedScene = preload("res://ui/gameplay/damage_number.
 var player_position: Vector2 = Vector2(0, 0)
 var player_orientation: float = 0.0
 
-var player_level_experience_table = [10.0, 80.0, 240, 640.0, 1600.0, 2880.0]
 var player_experience: float = 0.0:
 	get:
 		return player_experience
@@ -24,13 +23,12 @@ var player_experience: float = 0.0:
 		if player_experience != value:
 			player_experience = value
 			emit_signal("player_experience_changed", player_experience)
-var player_max_experience: float:
-	get:
-		return player_level_experience_table[player_level - 1]
+var player_experience_needed := 5.0
 var player_level: int = 1:
 	get:
 		return player_level
 	set(value):
+		player_experience_needed = get_experience_needed(value)
 		while value > player_level:
 			player_level += 1
 			emit_signal("player_level_up", player_level)
@@ -78,10 +76,13 @@ func player_gain_experience(experience_amount: float) -> void:
 		return
 		
 	player_experience += experience_amount
-	while player_experience >= player_max_experience:
-		player_experience -= player_max_experience
+	while player_experience >= player_experience_needed:
+		player_experience -= player_experience_needed
 		player_level += 1
 
+
+func get_experience_needed(level: int) -> float:
+	return level * (level + 1) * 2.5
 
 # 武器相关
 var player_bonus: Dictionary = {}

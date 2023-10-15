@@ -12,7 +12,7 @@ func _ready():
 
 
 func _on_player_experience_changed(new_experience: float) -> void:
-	experience_bar.value = new_experience / PlayerManager.player_max_experience
+	experience_bar.value = new_experience / PlayerManager.player_experience_needed
 
 
 func _on_player_level_up(new_level: int) -> void:

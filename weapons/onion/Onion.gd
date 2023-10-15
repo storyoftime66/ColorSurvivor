@@ -12,7 +12,7 @@ func _ready():
 	$Sprite2D.scale = Vector2(attributes["area"].value * 0.1808, attributes["area"].value * 0.1808)
 	
 # 进行射击
-func _on_ShootingTimer_timeout():
+func shoot():
 	for enemy in enemies_in_range:
 		if is_instance_valid(enemy):
 			var impact_impulse = (enemy.position - PlayerManager.player_position).normalized() * impact
