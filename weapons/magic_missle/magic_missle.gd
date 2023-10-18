@@ -6,7 +6,13 @@ class_name MagicMissle extends BaseWeapon
 func _ready():
 	projectile_scene = preload("res://weapons/magic_missle/magic_missle_projectile.tscn")
 	super._ready()
-	
-	
-func get_projectile_rot() -> float:
-	return PlayerManager.player_position.angle_to_point(EnemyManager.get_closest_enemy_position())
+
+
+# 构造发射物并添加到场景中，通常子类需要重写
+func spawn_projectile() -> void:
+	var projectile = create_projectile()
+	projectile.top_level = true
+	add_child(projectile)
+	projectile.global_position = global_position
+	projectile.global_rotation = PlayerManager.player_position.angle_to_point(
+		EnemyManager.get_closest_enemy_position())

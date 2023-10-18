@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://qlyampm8i6hk"]
+
+[ext_resource type="PackedScene" uid="uid://ce578vgimeu1f" path="res://weapons/base_weapon.tscn" id="1_tlul7"]
+[ext_resource type="Script" path="res://weapons/fuel_drop/fuel_drop.gd" id="2_3dhxc"]
+
+[node name="FuelDrop" instance=ExtResource("1_tlul7")]
+script = ExtResource("2_3dhxc")
+amount = 5
