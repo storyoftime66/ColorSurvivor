@@ -81,23 +81,13 @@ func create_projectile() -> BaseProjectile:
 	return projectile
 
 
-# 构造发射物并添加到场景中
+# 构造发射物并添加到场景中，通常子类需要重写
 func spawn_projectile() -> void:
 	var projectile = create_projectile()
 	projectile.top_level = true
 	add_child(projectile)
-	projectile.global_position = get_projectile_pos()
-	projectile.global_rotation = get_projectile_rot()
-
-
-# 获取发射物的生成位置，通常子类需要重写
-func get_projectile_pos() -> Vector2:
-	return global_position
-
-
-# 获取发射物的生成旋转，通常子类需要重写
-func get_projectile_rot() -> float:
-	return global_rotation
+	projectile.global_position = global_position
+	projectile.global_rotation = global_rotation
 
 
 # 进行射击
