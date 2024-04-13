@@ -1,5 +1,4 @@
 class_name Onion extends BaseWeapon
-
 # 洋葱，对角色附近敌人周期性造成伤害
 
 
@@ -11,7 +10,7 @@ func _ready():
 	($DamageArea/CollisionShape2D.shape as CircleShape2D).radius = attributes["area"].value * 16
 	$Sprite2D.scale = Vector2(attributes["area"].value * 0.1808, attributes["area"].value * 0.1808)
 	
-# 进行射击
+# [override] 进行射击
 func shoot():
 	for enemy in enemies_in_range:
 		if is_instance_valid(enemy):

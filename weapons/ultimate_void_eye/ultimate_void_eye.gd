@@ -1,5 +1,5 @@
 class_name UltimateVoidEye extends BaseWeapon
-## 虚空之眼，会在玩家角色身边盘旋，隔一段时间发射一次激光
+## [终极武器]虚空之眼，会在玩家角色身边盘旋，隔一段时间发射一次激光
 
 
 var eyes: Array[UltimateVoidEyeProjectile]
@@ -20,7 +20,6 @@ var lasing_num := 0
 
 
 func _ready():
-	projectile_scene = preload("res://weapons/ultimate_void_eye/ultimate_void_eye_projectile.tscn")
 	shooting_interval = 0.3
 	shooting_interval_timer.wait_time = shooting_interval
 	super._ready()

@@ -1,14 +1,8 @@
 class_name MagicMissle extends BaseWeapon
-
 # 魔法弹，朝最近的敌人发射一枚飞弹
 
 
-func _ready():
-	projectile_scene = preload("res://weapons/magic_missle/magic_missle_projectile.tscn")
-	super._ready()
-
-
-# 构造发射物并添加到场景中，通常子类需要重写
+# [override]
 func spawn_projectile() -> void:
 	var projectile = create_projectile()
 	projectile.top_level = true
