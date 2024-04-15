@@ -49,8 +49,8 @@ func initialize_weapons() -> void:
 #	obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
 #	obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
 #	obtain_weapon(load("res://weapons/onion/onion.tscn"))
-#	obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
-	obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
+	obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
+#	obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
 
 
 func _process(delta):

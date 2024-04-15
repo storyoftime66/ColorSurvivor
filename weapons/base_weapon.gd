@@ -68,7 +68,7 @@ func apply_player_bonus(attribute_name: String) -> void:
 func apply_all_player_bonus() -> void:
 	apply_all_bonus(player_character.attributes)
 
-# 构造发射物
+# [需要重载] 构造发射物，可能会需要进行其他初始化操作，在子类重载中实现
 func create_projectile() -> BaseProjectile:
 	var projectile = projectile_scene.instantiate() as BaseProjectile
 	projectile.damage = attributes["damage"].value
@@ -80,16 +80,17 @@ func create_projectile() -> BaseProjectile:
 	return projectile
 
 
-# 构造发射物并添加到场景中，通常子类需要重写
-func spawn_projectile() -> void:
+# [需要重载] 构造发射物并添加到场景中，通常子类需要重写
+func spawn_projectile() -> BaseProjectile:
 	var projectile = create_projectile()
 	projectile.top_level = true
 	add_child(projectile)
 	projectile.global_position = global_position
 	projectile.global_rotation = global_rotation
+	return projectile
 
 
-# [需要重载]进行射击
+# [需要重载] 进行射击
 func shoot() -> void:
 	remaining_amount = int(attributes["amount"].value)
 	shooting_interval_timer.start(shooting_interval)

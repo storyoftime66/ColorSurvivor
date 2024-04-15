@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://biw6bvvcpilyo"]
+
+[ext_resource type="PackedScene" uid="uid://dnwepi7w74l8n" path="res://weapon_components/damage_area_indicator_component/base_area_indicator.tscn" id="1_pt28v"]
+[ext_resource type="Script" path="res://weapon_components/damage_area_indicator_component/circle_area_indicator.gd" id="2_tao12"]
+
+[node name="CircleAreaIndicator" instance=ExtResource("1_pt28v")]
+script = ExtResource("2_tao12")

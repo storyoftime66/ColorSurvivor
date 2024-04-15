@@ -20,21 +20,25 @@ var lasing_num := 0
 
 
 func _ready():
-	shooting_interval = 0.3
+	shooting_interval = 0.6 / amount
 	shooting_interval_timer.wait_time = shooting_interval
 	super._ready()
 
 
-func spawn_projectile() -> void:
+func spawn_projectile() -> BaseProjectile:
 	var eye = create_projectile() as UltimateVoidEyeProjectile
 	eyes.append(eye)
 	eye_num = eyes.size()
 	
 	add_child(eye)
 	relayout_children()
+	
+	return eye
 
 
 func relayout_children() -> void:
+	shooting_interval = 0.6 / amount
+	
 	var angle = 2 * PI / eye_num
 	for i in range(eye_num):
 		eyes[i].rotation = angle * i
