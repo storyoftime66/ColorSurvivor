@@ -33,9 +33,10 @@ func update_style():
 		for prop_idx in range(state.get_node_property_count(node_idx)):
 			match state.get_node_property_name(node_idx, prop_idx):
 				"item_name":
+					print(state.get_node_property_value(node_idx, prop_idx))
 					pass
 				"item_icon":
-					pass
+					icon.texture = state.get_node_property_value(node_idx, prop_idx)
 				"description":
-					pass
+					description.text = state.get_node_property_value(node_idx, prop_idx)
 		break

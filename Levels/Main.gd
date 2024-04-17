@@ -24,6 +24,8 @@ func _ready():
 	print(state.get_node_instance(1) == comp_scene)
 	print(null_scene == null)
 	
+#	$ItemTile
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
