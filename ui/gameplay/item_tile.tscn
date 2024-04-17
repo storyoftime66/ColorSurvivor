@@ -1,38 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck2ns46k4s741"]
+[gd_scene load_steps=4 format=3 uid="uid://ck2ns46k4s741"]
 
+[ext_resource type="Texture2D" uid="uid://drb0gjga6lp31" path="res://ui/gameplay/nine_patch_dev.png" id="1_exqol"]
 [ext_resource type="Texture2D" uid="uid://ohnrcoo1emvj" path="res://icon.png" id="1_lxy0k"]
+[ext_resource type="Script" path="res://ui/gameplay/item_tile.gd" id="1_x8g1k"]
 
 [node name="ItemTile" type="Control"]
+custom_minimum_size = Vector2(200, 270)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 200.0
-offset_bottom = 270.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -135.0
+offset_right = 100.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x8g1k")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_exqol")
+patch_margin_left = 14
+patch_margin_top = 13
+patch_margin_right = 16
+patch_margin_bottom = 13
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="ItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="Icon" type="TextureRect" parent="Margin/VBox"]
+custom_minimum_size = Vector2(160, 128)
 layout_mode = 2
 texture = ExtResource("1_lxy0k")
-stretch_mode = 3
+expand_mode = 2
 
-[node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="DescriptionMargin" type="MarginContainer" parent="Margin/VBox"]
 layout_mode = 2
-text = "物品描述物品描述物品描述物品描述物品描述物品描述物品描述物品描述物品描述物品
-"
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBox/DescriptionMargin"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 3
+
+[node name="Description" type="Label" parent="Margin/VBox/DescriptionMargin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "物品描述物品描述物品描述物品描述物品描述物品描述物品描述物"
 autowrap_mode = 3
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer"]
-layout_mode = 2
-text = "确认"

@@ -20,9 +20,9 @@ class_name BaseWeapon extends Node2D
 # 连续射击时的射击间隔，通常为常数
 var shooting_interval: float = 0.05
 
-# 武器基本属性，类型: Dictionary[str, Attribute]
+# 武器基础属性，类型: Dictionary[str, Attribute]
 var weapon_attributes: Dictionary = {}
-# 经过角色增益后的武器属性
+# 经过增益后的武器属性
 var attributes: Dictionary = {}
 
 # 武器状态

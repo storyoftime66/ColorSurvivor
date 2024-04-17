@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4iuglwcbjtbk"]
+
+[ext_resource type="Script" path="res://weapon_components/item_component/item_component.gd" id="1_jk5f7"]
+
+[node name="ItemComponent" type="Node"]
+editor_description = "拥有该组件的场景被视为一个“道具”，可被item_tile获取以显示信息。"
+script = ExtResource("1_jk5f7")
