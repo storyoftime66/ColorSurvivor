@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ck2ns46k4s741" path="res://ui/gameplay/item_tile.tscn" id="2_rxtjq"]
 [ext_resource type="Script" path="res://Levels/Main.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://ce578vgimeu1f" path="res://weapons/base_weapon.tscn" id="3_y0f2t"]
+[ext_resource type="PackedScene" uid="uid://rokx6p7qp7ej" path="res://weapons/ultimate_void_eye/ultimate_void_eye.tscn" id="3_78t0v"]
 
 [node name="Main" type="Node"]
 script = ExtResource("3")
@@ -12,4 +12,4 @@ offset_left = -449.0
 offset_top = -179.0
 offset_right = -249.0
 offset_bottom = 91.0
-item_scene = ExtResource("3_y0f2t")
+item_scene = ExtResource("3_78t0v")

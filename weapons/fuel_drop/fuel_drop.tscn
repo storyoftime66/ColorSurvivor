@@ -16,3 +16,7 @@ impact = 200.0
 
 [node name="DamageAreaIndicatorComponent" parent="." index="2" instance=ExtResource("4_ky4hn")]
 indicator_class = ExtResource("5_cvlct")
+
+[node name="ItemComponent" parent="." index="3"]
+item_name = "燃料液滴"
+description = "在随机位置造成范围伤害"

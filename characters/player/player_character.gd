@@ -53,7 +53,6 @@ func _ready():
 	($PickupRange/PickupRangeShape.shape as CircleShape2D).radius = attributes["magnet"].value
 	
 	screen_size = get_viewport_rect().size
-	print("PlayerCharacter Ready")
 	
 
 # 移动输入处理

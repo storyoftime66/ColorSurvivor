@@ -27,6 +27,7 @@ func _ready():
 
 func spawn_projectile() -> BaseProjectile:
 	var eye = create_projectile() as UltimateVoidEyeProjectile
+	eye.weapon = self
 	eyes.append(eye)
 	eye_num = eyes.size()
 	
@@ -54,6 +55,9 @@ func apply_bonus(attribute_name: String, bonus: CommonTypes.Attribute) -> void:
 			var new_eye_num = int(attributes["amount"].value)
 			while new_eye_num > eye_num:
 				spawn_projectile()
+		"area":
+			for eye in eyes:
+				eye.update_attributes()
 
 
 func _process(delta):

@@ -11,3 +11,7 @@ damage = 5.0
 speed = 600.0
 amount = 2
 cooldown = 1.0
+
+[node name="ItemComponent" parent="." index="2"]
+item_name = "小刀"
+description = "向前进方向扔出小刀"

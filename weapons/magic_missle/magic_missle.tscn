@@ -10,3 +10,7 @@ projectile_scene = ExtResource("3_m3iy4")
 damage = 5.0
 speed = 400.0
 cooldown = 1.0
+
+[node name="ItemComponent" parent="." index="2"]
+item_name = "魔法弹"
+description = "朝最近敌人发射魔法弹"

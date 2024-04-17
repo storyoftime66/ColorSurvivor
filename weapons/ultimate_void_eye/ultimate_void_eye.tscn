@@ -7,10 +7,15 @@
 [node name="UltimateVoidEye" instance=ExtResource("1_ew2xa")]
 script = ExtResource("2_ox8b8")
 projectile_scene = ExtResource("3_f7qsh")
-speed = 100.0
-amount = 3
+area = 10.0
+speed = 200.0
+amount = 5
 cooldown = 5.0
 impact = 300.0
 
 [node name="ShootingTimer" parent="." index="0"]
 one_shot = false
+
+[node name="ItemComponent" parent="." index="2"]
+item_name = "虚空之眼"
+description = "粉 分 毁灭"

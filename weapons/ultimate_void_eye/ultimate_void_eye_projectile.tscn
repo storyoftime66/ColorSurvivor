@@ -6,14 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://coey0tyqtpq31" path="res://weapons/ultimate_void_eye/laser.svg" id="4_bs3r3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1us8"]
-size = Vector2(155, 8)
+size = Vector2(158, 8)
 
 [node name="UltimateVoidEyeProjectile" instance=ExtResource("1_e82jl")]
 script = ExtResource("2_6k85h")
 
 [node name="CollisionShape2D" parent="." index="0"]
-visible = false
-position = Vector2(84.5, 0)
+position = Vector2(79, 0)
 shape = SubResource("RectangleShape2D_x1us8")
 disabled = true
 
@@ -28,10 +27,9 @@ texture = ExtResource("3_hjm4c")
 one_shot = true
 
 [node name="Laser" type="Sprite2D" parent="." index="4"]
-visible = false
-position = Vector2(85, 2.27374e-13)
+position = Vector2(79, 0)
 rotation = 1.5708
-scale = Vector2(0.2, 1.025)
+scale = Vector2(0.2, 1)
 texture = ExtResource("4_bs3r3")
 
 [connection signal="timeout" from="LaserDuration" to="." method="stop_lasing"]

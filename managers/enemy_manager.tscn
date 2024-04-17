@@ -6,7 +6,7 @@
 script = ExtResource("1")
 
 [node name="EnemySpawning" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.1
 autostart = true
 
 [connection signal="timeout" from="EnemySpawning" to="." method="_on_EnemySpawning_timeout"]
