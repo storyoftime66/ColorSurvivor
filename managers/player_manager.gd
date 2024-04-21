@@ -1,37 +1,20 @@
 extends Node
 ## 包含和玩家、玩家角色相关的全局逻辑
 
-
-signal player_level_up(new_level)
-signal player_experience_changed(new_experience)
+signal player_ready(player_character: PlayerCharacter)
 
 var level_node: Node
 
-# 玩家角色
+# 玩家角色及组件
 var player_character: PlayerCharacter
 var player_character_scene: PackedScene = preload("res://characters/player/player_character.tscn")
-var damage_number_scene: PackedScene = preload("res://ui/gameplay/damage_number.tscn")
+var player_level_component: LevelComponent
 
 # 玩家角色状态
 var player_position: Vector2 = Vector2(0, 0)
 var player_orientation: float = 0.0
 
-var player_experience: float = 0.0:
-	get:
-		return player_experience
-	set(value):
-		if player_experience != value:
-			player_experience = value
-			emit_signal("player_experience_changed", player_experience)
-var player_experience_needed := 5.0
-var player_level: int = 1:
-	get:
-		return player_level
-	set(value):
-		player_experience_needed = get_experience_needed(value)
-		while value > player_level:
-			player_level += 1
-			emit_signal("player_level_up", player_level)
+var damage_number_scene: PackedScene = preload("res://ui/gameplay/damage_number.tscn")
 
 
 func _ready():
@@ -63,28 +46,14 @@ func _process(delta):
 			player_orientation = player_character.movement_input.angle()
 
 
-# 工具
+# 工具方法
 func spawn_damage_number(pos: Vector2, damage_amount: float) -> void:
 	var damage_number = damage_number_scene.instantiate()
 	damage_number.position = pos
 	damage_number.number = damage_amount
 	
 	level_node.add_child(damage_number)
-
-
-# 玩家等级相关
-func player_gain_experience(experience_amount: float) -> void:
-	if experience_amount < 0.0:
-		return
-		
-	player_experience += experience_amount
-	while player_experience >= player_experience_needed:
-		player_experience -= player_experience_needed
-		player_level += 1
-
-
-func get_experience_needed(level: int) -> float:
-	return level * (level + 1) * 2.5
+	
 
 # 武器相关
 var player_bonus: Dictionary = {}

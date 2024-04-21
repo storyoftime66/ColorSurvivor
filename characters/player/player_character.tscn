@@ -3,12 +3,10 @@
 [ext_resource type="Script" path="res://characters/player/player_character.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cvve8b73lmr5h" path="res://characters/player/player_character.svg" id="2_qb4rh"]
 [ext_resource type="PackedScene" uid="uid://ykl2b4232se1" path="res://characters/components/pickup_component/pickup_component.tscn" id="3_qx5yt"]
+[ext_resource type="PackedScene" uid="uid://dsuye6e51ojmb" path="res://characters/components/level_component/level_component.tscn" id="4_y0q4q"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 16.0312
-
-[sub_resource type="CircleShape2D" id="2"]
-radius = 80.0
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 collision_layer = 2
@@ -22,13 +20,6 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_qb4rh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="PickupRange" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="PickupRangeShape" type="CollisionShape2D" parent="PickupRange"]
-shape = SubResource("2")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 anchors_preset = 8
@@ -52,4 +43,6 @@ show_percentage = false
 
 [node name="PickupComponent" parent="." instance=ExtResource("3_qx5yt")]
 
-[connection signal="body_entered" from="PickupRange" to="." method="_on_PickupRange_body_entered"]
+[node name="LevelComponent" parent="." instance=ExtResource("4_y0q4q")]
+
+[connection signal="item_absorbed" from="PickupComponent" to="." method="_on_pickup_component_item_absorbed"]

@@ -13,11 +13,16 @@ class_name PickupComponent extends Area2D
 @onready var collision_shape := $CollisionShape2D.shape as CircleShape2D
 
 
+signal item_picked_up(pickable_item: BasePickableItem)
+signal item_absorbed(pickable_item: BasePickableItem)
+
+
 func _ready():
-	radius = radius
+	collision_shape.radius = radius
 
 
 func _on_body_entered(body):
 	var pickable_item = body as BasePickableItem
 	if is_instance_valid(pickable_item):
 		pickable_item.on_picked_up(self)
+		emit_signal("item_picked_up", pickable_item)

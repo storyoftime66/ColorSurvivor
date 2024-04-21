@@ -31,7 +31,12 @@ var health :float:
 # 屏幕大小
 var screen_size: Vector2
 
+# 组件
+@onready var pickup_component = $PickupComponent as PickupComponent
+@onready var level_component = $LevelComponent as LevelComponent
+
 func _ready():
+	print("player_character ready")
 	# 角色自身属性
 	attributes["move_speed"] = CommonTypes.Attribute.new(move_speed)
 	attributes["armor"] = CommonTypes.Attribute.new(armor)
@@ -50,9 +55,12 @@ func _ready():
 	
 	health = max_health
 	
-	($PickupRange/PickupRangeShape.shape as CircleShape2D).radius = attributes["magnet"].value
+	level_component.required_exp_evaluator = get_experience_needed
+	pickup_component.radius = attributes["magnet"].value
 	
 	screen_size = get_viewport_rect().size
+	
+	PlayerManager.emit_signal("player_ready", self)
 	
 
 # 移动输入处理
@@ -80,8 +88,12 @@ func take_damage(damage_amount: float) -> float:
 	
 	return actual_damage_amount
 
-func _on_PickupRange_body_entered(body):
-	var pickable_item = body as BasePickableItem
-	if is_instance_valid(pickable_item):
-		pickable_item.on_picked_up(self)
 
+func get_experience_needed(level: int) -> float:
+	return level * (level + 1) * 2.5
+
+func _on_pickup_component_item_absorbed(pickable_item: BasePickableItem):
+	# 经验的处理方法
+	if pickable_item is Experience:
+		level_component.gain_exp(pickable_item.amount)
+		return
