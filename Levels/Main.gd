@@ -1,8 +1,8 @@
 extends Node
 
 var scene = preload("res://weapons/fuel_drop/fuel_drop.tscn")
-var comp_scene = preload("res://weapon_components/damage_area_indicator_component/damage_area_indicator_component.tscn")
-var base_comp_scene = preload("res://weapon_components/damage_area_indicator_component/circle_area_indicator.tscn")
+var comp_scene = preload("res://components/damage_area_indicator_component/damage_area_indicator_component.tscn")
+var base_comp_scene = preload("res://components/damage_area_indicator_component/circle_area_indicator.tscn")
 var null_scene: PackedScene
 var gd_scene = preload("res://characters/enemies/base_enemy.gd")
 

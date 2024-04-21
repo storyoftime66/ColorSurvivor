@@ -42,6 +42,7 @@ func _ready():
 	player_character = player_character_scene.instantiate()
 	level_node.add_child(player_character)
 	player_character.position = player_character.get_viewport_rect().size * 0.5
+	
 	call_deferred("initialize_weapons")
 
 func initialize_weapons() -> void:

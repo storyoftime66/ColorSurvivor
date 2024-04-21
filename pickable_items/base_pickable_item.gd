@@ -1,5 +1,6 @@
 class_name BasePickableItem extends RigidBody2D
-## 拾取物基类
+# 拾取物基类
+# 被拾取时()会朝拾取者飞去，飞行到拾取者的位置后，才会真正被获取
 
 @export var flight_time := 1.0
 var picker_node: Node2D
@@ -12,6 +13,7 @@ func _ready():
 
 
 func _physics_process(delta):
+	# 大概0.5s后飞到拾取者处
 	t += delta * 2.0
 	position = start_pos.lerp(picker_node.position, t)
 	if t > 1.0:
