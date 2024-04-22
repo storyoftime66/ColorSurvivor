@@ -1,20 +1,16 @@
 class_name PlayerCharacter extends CharacterBody2D
+# 玩家角色基类
 
-## 玩家角色基类
 signal player_character_died()
 signal player_character_health_changed(new_health)
 
 # 玩家属性
-# 移动速度，单位像素/秒
-@export var move_speed := 200.0
-# 防御力，减少每次受击承受的伤害
-@export var armor := 1.0
-# 最大生命值
-@export var max_health := 100.0
-# 拾取范围，单位像素
-@export var magnet := 80.0
+@export var move_speed := 200.0		## 移动速度，单位像素/秒
+@export var armor := 1.0			## 防御力，减少每次受击承受的伤害
+@export var max_health := 100.0		## 最大生命值
+@export var magnet := 80.0			## 拾取范围，单位像素
 
-# 玩家属性
+# 玩家属性，会作用于武器，类型Dictionary[String, CommonTypes.Attribute]
 var attributes: Dictionary = {}
 
 # 玩家状态
@@ -32,11 +28,11 @@ var health :float:
 var screen_size: Vector2
 
 # 组件
-@onready var pickup_component = $PickupComponent as PickupComponent
-@onready var level_component = $LevelComponent as LevelComponent
+@onready var pickup_comp = $PickupComponent as PickupComponent
+@onready var level_comp = $LevelComponent as LevelComponent
+@onready var weapon_comp = $WeaponComponent as WeaponComponent
 
 func _ready():
-	print("player_character ready")
 	# 角色自身属性
 	attributes["move_speed"] = CommonTypes.Attribute.new(move_speed)
 	attributes["armor"] = CommonTypes.Attribute.new(armor)
@@ -55,16 +51,16 @@ func _ready():
 	
 	health = max_health
 	
-	level_component.required_exp_evaluator = get_experience_needed
-	pickup_component.radius = attributes["magnet"].value
+	level_comp.required_exp_evaluator = get_experience_needed
+	pickup_comp.radius = attributes["magnet"].value
 	
 	screen_size = get_viewport_rect().size
 	
 	PlayerManager.emit_signal("player_ready", self)
 	
 
-# 移动输入处理
 func _physics_process(delta):
+	# 移动输入处理
 	movement_input = Vector2.ZERO
 	if Input.is_action_pressed("move_left"):
 		movement_input.x -= 1
@@ -95,5 +91,5 @@ func get_experience_needed(level: int) -> float:
 func _on_pickup_component_item_absorbed(pickable_item: BasePickableItem):
 	# 经验的处理方法
 	if pickable_item is Experience:
-		level_component.gain_exp(pickable_item.amount)
+		level_comp.gain_exp(pickable_item.amount)
 		return

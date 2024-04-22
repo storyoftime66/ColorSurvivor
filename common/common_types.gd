@@ -63,9 +63,10 @@ class Attribute:
 	
 	func duplicate_and_apply_modifier(modifier: Attribute) -> Attribute:
 		var new_attribute = Attribute.new(base_value)
+		new_attribute.is_dirty = true
 		new_attribute.addition = addition + modifier.addition
-		new_attribute.multiplier = multiplier + modifier.multiplier
-		new_attribute.divider = divider + modifier.divider
+		new_attribute.multiplier = multiplier + modifier.multiplier - 1
+		new_attribute.divider = divider + modifier.divider - 1
 		return new_attribute
 	
 	func reset() -> void:
@@ -75,5 +76,11 @@ class Attribute:
 		is_dirty = true
 		emit_signal("value_changed", value)
 	
-	func _init(init_base_value: float):
+	func _init(
+		init_base_value: float = 0.0, init_addition: float = 0.0,
+		init_multiplier: float = 0.0, init_divider: float = 0.0
+	):
 		base_value = init_base_value
+		addition = init_addition
+		multiplier = init_multiplier
+		divider = init_divider

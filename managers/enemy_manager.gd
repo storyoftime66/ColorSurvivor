@@ -32,7 +32,7 @@ func _on_EnemySpawning_timeout() -> void:
 	var angle = randf() * 2 * PI
 	var relative_position = Vector2(cos(angle) * 800, sin(angle) * 800)
 	# 在玩家屏幕外生成，随机旋转
-	enemy.position = PlayerManager.player_position + relative_position
+	enemy.position = PlayerManager.players[0].position + relative_position
 	enemy.rotation = randf() * 2 * PI
 	
 	level_node.add_child(enemy)

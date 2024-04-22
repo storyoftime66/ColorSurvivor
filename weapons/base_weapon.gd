@@ -28,7 +28,7 @@ var attributes: Dictionary = {}
 # 武器状态
 # 单次发射中剩余未发射的数量
 var remaining_amount: int = 0
-var player_character: PlayerCharacter
+var weapon_comp: WeaponComponent
 
 
 func _ready():
@@ -42,13 +42,13 @@ func _ready():
 	weapon_attributes["penetration"] = CommonTypes.Attribute.new(penetration)
 	weapon_attributes["impact"] = CommonTypes.Attribute.new(impact)
 	
-	assert(player_character != null)
 	attributes = weapon_attributes.duplicate(true)
 	apply_all_player_bonus()
 	
 	shooting_timer.start(attributes["cooldown"].value)
 
 
+#region Bonus
 # 应用增益
 func apply_bonus(attribute_name: String, bonus: CommonTypes.Attribute) -> void:
 	attributes[attribute_name] = weapon_attributes[attribute_name].duplicate_and_apply_modifier(bonus)
@@ -59,14 +59,15 @@ func apply_all_bonus(bonus_dict: Dictionary) -> void:
 		if bonus_dict.has(key) and bonus_dict[key] is CommonTypes.Attribute:
 			apply_bonus(key, bonus_dict[key])
 
-
 # 应用玩家角色的增益
 func apply_player_bonus(attribute_name: String) -> void:
-	apply_bonus(attribute_name, player_character.attributes[attribute_name])
+	apply_bonus(attribute_name, weapon_comp.bonus[attribute_name])
 	
 # 应用角色的所有增益
 func apply_all_player_bonus() -> void:
-	apply_all_bonus(player_character.attributes)
+	apply_all_bonus(weapon_comp.bonus)
+#endregion
+
 
 # [需要重载] 构造发射物，可能会需要进行其他初始化操作，在子类重载中实现
 func create_projectile() -> BaseProjectile:
