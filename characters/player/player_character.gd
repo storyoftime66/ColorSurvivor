@@ -10,6 +10,7 @@ signal player_character_health_changed(new_health)
 @export var max_health := 100.0		## 最大生命值
 @export var magnet := 80.0			## 拾取范围，单位像素
 
+
 # 玩家属性，会作用于武器，类型Dictionary[String, CommonTypes.Attribute]
 var attributes: Dictionary = {}
 
@@ -38,16 +39,6 @@ func _ready():
 	attributes["armor"] = CommonTypes.Attribute.new(armor)
 	attributes["max_health"] = CommonTypes.Attribute.new(max_health)
 	attributes["magnet"] = CommonTypes.Attribute.new(magnet)
-	
-	# 角色对武器的增益
-	attributes["damage"] = CommonTypes.Attribute.new(0.0)
-	attributes["area"] = CommonTypes.Attribute.new(0.0)
-	attributes["speed"] = CommonTypes.Attribute.new(0.0)
-	attributes["duration"] = CommonTypes.Attribute.new(0.0)
-	attributes["amount"] = CommonTypes.Attribute.new(0.0)
-	attributes["cooldown"] = CommonTypes.Attribute.new(0.0)
-	attributes["penetration"] = CommonTypes.Attribute.new(0.0)
-	attributes["impact"] = CommonTypes.Attribute.new(0.0)
 	
 	health = max_health
 	

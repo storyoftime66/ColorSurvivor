@@ -65,8 +65,8 @@ class Attribute:
 		var new_attribute = Attribute.new(base_value)
 		new_attribute.is_dirty = true
 		new_attribute.addition = addition + modifier.addition
-		new_attribute.multiplier = multiplier + modifier.multiplier - 1
-		new_attribute.divider = divider + modifier.divider - 1
+		new_attribute.multiplier = multiplier + modifier.multiplier
+		new_attribute.divider = divider + modifier.divider
 		return new_attribute
 	
 	func reset() -> void:

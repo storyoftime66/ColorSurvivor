@@ -51,21 +51,3 @@ func spawn_damage_number(pos: Vector2, damage_amount: float) -> void:
 	
 	level_node.add_child(damage_number)
 	
-
-## 武器相关
-#var player_bonus: Dictionary = {}
-## 所有武器，Dictionary[PackedScene, BaseWeapon]
-#var weapons: Dictionary = {}
-#
-#func obtain_weapon(wepaon_scene: PackedScene) -> void:
-#	if weapons.has(wepaon_scene):
-#		weapons[wepaon_scene].upgrade()
-#	else:
-#		var weapon = wepaon_scene.instantiate() as BaseWeapon
-#		weapon.apply_all_bonus(player_bonus)
-#
-#		var player_character = PlayerManager.player_character
-#		weapons[wepaon_scene] = weapon
-#		weapon.player_character = player_character
-#		player_character.add_child(weapon)
-#		weapon.owner = player_character

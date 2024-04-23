@@ -19,6 +19,7 @@ func _ready():
 	update_attributes()
 
 
+# [override]
 func _physics_process(delta):
 	# do nothing
 	pass

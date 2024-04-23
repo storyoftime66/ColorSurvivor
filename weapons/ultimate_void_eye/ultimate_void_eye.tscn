@@ -7,9 +7,8 @@
 [node name="UltimateVoidEye" instance=ExtResource("1_ew2xa")]
 script = ExtResource("2_ox8b8")
 projectile_scene = ExtResource("3_f7qsh")
-area = 10.0
-speed = 200.0
-amount = 5
+speed = 100.0
+amount = 2
 cooldown = 5.0
 impact = 300.0
 

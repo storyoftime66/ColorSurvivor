@@ -25,6 +25,7 @@ func _ready():
 	super._ready()
 
 
+# [override]
 func spawn_projectile() -> BaseProjectile:
 	var eye = create_projectile() as UltimateVoidEyeProjectile
 	eye.weapon = self
