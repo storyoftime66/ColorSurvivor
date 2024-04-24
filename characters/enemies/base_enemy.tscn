@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://52hu2acvry6v"]
+[gd_scene load_steps=5 format=3 uid="uid://52hu2acvry6v"]
 
 [ext_resource type="Script" path="res://characters/enemies/base_enemy.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bj7l4wbdo50r1" path="res://characters/components/character_component/character_component.tscn" id="2_oy8y4"]
 
 [sub_resource type="CircleShape2D" id="1"]
 
@@ -30,7 +31,11 @@ wait_time = 0.2
 wait_time = 0.25
 autostart = true
 
+[node name="CharacterComponent" parent="." instance=ExtResource("2_oy8y4")]
+max_health = 50.0
+
 [connection signal="body_entered" from="AttackRange" to="." method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_AttackRange_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="MovementTimer" to="." method="_on_MovementTimer_timeout"]
+[connection signal="character_died" from="CharacterComponent" to="." method="_on_character_component_character_died"]

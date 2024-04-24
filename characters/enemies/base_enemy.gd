@@ -1,17 +1,12 @@
 class_name BaseEnemy extends RigidBody2D
-
 # 敌人基类
 
-signal enemy_died(enemy)
-
 # 属性：攻击伤害、移动速度、血量
-@export var attack_damage: float = 5.0
-@export var speed: float = 100.0
-@export var health: float = 10.0
-@export var weight: float = 1.0
+@export var attack_damage: float = 5.0		## 攻击伤害
 @export var experience_amount: float = 1.0
 
 @onready var attack_timer := $AttackTimer as Timer
+@onready var character_comp := $CharacterComponent as CharacterComponent
 
 # 状态
 var player: PlayerCharacter
@@ -20,25 +15,7 @@ var speed_force_length := 0.0
 
 
 func _ready():
-	speed_force_length = speed * weight * linear_damp
-	mass = weight
-
-
-# 受到伤害，返回实际受到的伤害值
-func take_damage(damage: float, impact: Vector2 = Vector2.ZERO) -> float:
-	health -= damage
-	if health <= 0:
-		die()
-	else:
-		apply_central_impulse(impact)
-	return damage
-
-
-# 死亡
-func die():
-	emit_signal("enemy_died", self)
-	EnemyManager.spawn_experience(experience_amount, position)
-	queue_free()
+	speed_force_length = character_comp.move_speed * character_comp.mass * linear_damp
 
 
 # 对玩家造成伤害
@@ -60,3 +37,8 @@ func _on_AttackTimer_timeout() -> void:
 func _on_MovementTimer_timeout() -> void:
 	# TODO: 优化移动方式
 	constant_force = (PlayerManager.players[0].position - position).normalized() * speed_force_length
+
+
+func _on_character_component_character_died(comp):
+	EnemyManager.spawn_experience(experience_amount, position)
+	queue_free()

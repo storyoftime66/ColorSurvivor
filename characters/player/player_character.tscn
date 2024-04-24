@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqvy6hhd6n5s8"]
+[gd_scene load_steps=8 format=3 uid="uid://cqvy6hhd6n5s8"]
 
 [ext_resource type="Script" path="res://characters/player/player_character.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cvve8b73lmr5h" path="res://characters/player/player_character.svg" id="2_qb4rh"]
 [ext_resource type="PackedScene" uid="uid://ykl2b4232se1" path="res://characters/components/pickup_component/pickup_component.tscn" id="3_qx5yt"]
 [ext_resource type="PackedScene" uid="uid://dsuye6e51ojmb" path="res://characters/components/level_component/level_component.tscn" id="4_y0q4q"]
 [ext_resource type="PackedScene" uid="uid://dy5ualmx8mehi" path="res://characters/components/weapon_component/weapon_component.tscn" id="5_utxq6"]
+[ext_resource type="PackedScene" uid="uid://bj7l4wbdo50r1" path="res://characters/components/character_component/character_component.tscn" id="6_2flbj"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 16.0312
@@ -48,4 +49,8 @@ show_percentage = false
 
 [node name="WeaponComponent" parent="." instance=ExtResource("5_utxq6")]
 
+[node name="CharacterComponent" parent="." instance=ExtResource("6_2flbj")]
+move_speed = 200.0
+
 [connection signal="item_absorbed" from="PickupComponent" to="." method="_on_pickup_component_item_absorbed"]
+[connection signal="health_changed" from="CharacterComponent" to="." method="_on_character_component_health_changed"]

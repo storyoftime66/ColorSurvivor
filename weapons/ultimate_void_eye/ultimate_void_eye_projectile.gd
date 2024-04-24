@@ -64,6 +64,6 @@ func _on_hit(body):
 	var enemy = body as BaseEnemy
 	if enemy != null:
 		var impact_impulse = Vector2(1.0, 0.0).rotated(global_rotation) * impact
-		var actual_damage = enemy.take_damage(damage, impact_impulse)
+		var actual_damage = enemy.character_comp.take_damage(damage, impact_impulse)
 		PlayerManager.spawn_damage_number(enemy.position, actual_damage)
 
