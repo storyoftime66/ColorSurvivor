@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://uilb2irys15i"]
+[gd_scene load_steps=2 format=3 uid="uid://uilb2irys15i"]
 
 [ext_resource type="Script" path="res://ui/gameplay/obtaining_item_page.gd" id="1_3irnh"]
-[ext_resource type="PackedScene" uid="uid://ck2ns46k4s741" path="res://ui/gameplay/item_tile.tscn" id="2_nd33a"]
 
 [node name="obtaining_item_page" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,12 +27,3 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(0, 135)
 theme_override_constants/separation = 80
-
-[node name="ItemTile" parent="HBox" instance=ExtResource("2_nd33a")]
-layout_mode = 2
-
-[node name="ItemTile2" parent="HBox" instance=ExtResource("2_nd33a")]
-layout_mode = 2
-
-[node name="ItemTile3" parent="HBox" instance=ExtResource("2_nd33a")]
-layout_mode = 2

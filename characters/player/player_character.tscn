@@ -53,4 +53,5 @@ show_percentage = false
 move_speed = 200.0
 
 [connection signal="item_absorbed" from="PickupComponent" to="." method="_on_pickup_component_item_absorbed"]
+[connection signal="level_up" from="LevelComponent" to="." method="_on_level_component_level_up"]
 [connection signal="health_changed" from="CharacterComponent" to="." method="_on_character_component_health_changed"]

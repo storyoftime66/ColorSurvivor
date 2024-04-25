@@ -8,7 +8,7 @@ func spawn_projectile() -> BaseProjectile:
 	projectile.top_level = true
 	add_child(projectile)
 	projectile.global_position = global_position
-	projectile.global_rotation = PlayerManager.player_position.angle_to_point(
+	projectile.global_rotation = PlayerManager.players[0].position.angle_to_point(
 		EnemyManager.get_closest_enemy_position())
 		
 	return projectile

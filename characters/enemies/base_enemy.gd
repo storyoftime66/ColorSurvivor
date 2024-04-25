@@ -1,9 +1,8 @@
 class_name BaseEnemy extends RigidBody2D
 # 敌人基类
 
-# 属性：攻击伤害、移动速度、血量
-@export var attack_damage: float = 5.0		## 攻击伤害
-@export var experience_amount: float = 1.0
+@export var attack_damage: float = 5.0			## 攻击伤害
+@export var exp_amount: float = 1.0		## 经验值
 
 @onready var attack_timer := $AttackTimer as Timer
 @onready var character_comp := $CharacterComponent as CharacterComponent
@@ -31,7 +30,7 @@ func _on_AttackRange_body_exited(_body):
 
 func _on_AttackTimer_timeout() -> void:
 	if is_instance_valid(player):
-		player.take_damage(attack_damage)
+		player.character_comp.take_damage(attack_damage)
 
 
 func _on_MovementTimer_timeout() -> void:
@@ -40,5 +39,5 @@ func _on_MovementTimer_timeout() -> void:
 
 
 func _on_character_component_character_died(comp):
-	EnemyManager.spawn_experience(experience_amount, position)
+	EnemyManager.spawn_experience(exp_amount, position)
 	queue_free()

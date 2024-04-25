@@ -8,6 +8,6 @@ func spawn_projectile() -> BaseProjectile:
 	projectile.top_level = true
 	add_child(projectile)
 	projectile.global_position = global_position
-	projectile.global_rotation = PlayerManager.player_orientation
+	projectile.global_rotation = PlayerManager.players[0].orientation
 	
 	return projectile

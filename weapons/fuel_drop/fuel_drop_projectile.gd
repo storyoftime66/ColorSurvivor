@@ -46,6 +46,6 @@ func _on_LifeSpan_timeout():
 		var enemy = result.collider as BaseEnemy
 		if enemy != null:
 			var impact_impulse = (enemy.global_position - target_position).normalized() * impact
-			var actual_damage = enemy.take_damage(damage, impact_impulse)
+			var actual_damage = enemy.character_comp.take_damage(damage, impact_impulse)
 			PlayerManager.spawn_damage_number(enemy.position, actual_damage)
 	destroy()

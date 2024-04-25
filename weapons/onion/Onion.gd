@@ -3,7 +3,7 @@ class_name Onion extends BaseWeapon
 
 
 # 在范围内的敌人
-var enemies_in_range: Array = []
+var enemies_in_range: Array[BaseEnemy] = []
 
 func _ready():
 	super._ready()
@@ -14,8 +14,8 @@ func _ready():
 func shoot():
 	for enemy in enemies_in_range:
 		if is_instance_valid(enemy):
-			var impact_impulse = (enemy.position - PlayerManager.player_position).normalized() * impact
-			var actual_damage = (enemy as BaseEnemy).take_damage(damage, impact_impulse)
+			var impact_impulse = (enemy.global_position - global_position).normalized() * impact
+			var actual_damage = enemy.character_comp.take_damage(damage, impact_impulse)
 			PlayerManager.spawn_damage_number(enemy.position, actual_damage)
 
 func _on_DamageArea_body_entered(body):

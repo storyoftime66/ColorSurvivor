@@ -21,10 +21,8 @@ var movement_input: Vector2
 
 func _ready():
 	# 角色自身属性
-	level_comp.required_exp_evaluator = get_experience_needed
-	
+	level_comp.required_exp_evaluator = get_required_exp
 	screen_size = get_viewport_rect().size
-	
 	PlayerManager.emit_signal("player_ready", self)
 	
 
@@ -43,15 +41,11 @@ func _physics_process(delta):
 	set_velocity(movement_direction * character_comp.move_speed)
 	move_and_slide()
 	var velocity = velocity
-
-
-# TODO: 受到伤害，返回实际受到的伤害
-func take_damage(damage_amount: float) -> float:
-	return character_comp.take_damage(damage_amount)
 	
 
-func get_experience_needed(level: int) -> float:
+func get_required_exp(level: int) -> float:
 	return level * (level + 1) * 2.5
+
 
 func _on_pickup_component_item_absorbed(pickable_item: BasePickableItem):
 	# 经验的处理方法
@@ -62,3 +56,14 @@ func _on_pickup_component_item_absorbed(pickable_item: BasePickableItem):
 
 func _on_character_component_health_changed(old_value, new_value):
 	($HealthBar as ProgressBar).value = new_value / character_comp.max_health
+
+
+func _on_level_component_level_up(new_level):
+	# TODO: 先做到PlayerManager中
+	get_tree().paused = true
+	var item_page_scene = load("res://ui/gameplay/obtaining_item_page.tscn") as PackedScene
+	var item_page = item_page_scene.instantiate() as ObtainingItemPage
+	var weapon_list = PlayerManager.weapon_list.duplicate()
+	weapon_list.shuffle()
+	item_page.item_scenes = weapon_list.slice(0, 3)
+	HUD.add_child(item_page)

@@ -16,7 +16,7 @@ func get_closest_enemy_position() -> Vector2:
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	var closest_pos := Vector2(2000, 0).rotated(randf() * 360.0)
 	var closest_distance_square := INF
-	var player_position = PlayerManager.player_position
+	var player_position = PlayerManager.players[0].position
 	var temp_distance_square: float
 	for enemy in enemies:
 		temp_distance_square = enemy.position.distance_squared_to(player_position)

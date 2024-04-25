@@ -1,6 +1,8 @@
 class_name ItemTile extends Control
 
 
+signal item_tile_clicked(item_scene: PackedScene)		## 道具卡片被点击时
+
 # ItemComponent节点的名称，通过名称来识别节点。TODO: 改进
 const ITEM_COMP_NAME := "ItemComponent"
 
@@ -50,3 +52,8 @@ func update_style():
 					description = state.get_node_property_value(node_idx, prop_idx)
 					description_node.text = description
 		break
+
+
+func _on_gui_input(event: InputEvent):
+	if event.is_pressed():
+		emit_signal("item_tile_clicked", item_scene)

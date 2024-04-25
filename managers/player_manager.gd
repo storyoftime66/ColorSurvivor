@@ -11,7 +11,13 @@ var player_character_scene: PackedScene = preload("res://characters/player/playe
 var player_level_component: LevelComponent
 
 var damage_number_scene: PackedScene = preload("res://ui/gameplay/damage_number.tscn")
-
+var weapon_list := [
+	preload("res://weapons/fuel_drop/fuel_drop.tscn"),				## 爆炸液滴
+	preload("res://weapons/knifes/knifes.tscn"),					## 飞刀
+	preload("res://weapons/magic_missle/magic_missle.tscn"),		## 魔法飞弹
+	preload("res://weapons/onion/onion.tscn"),						## 洋葱
+	preload("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"),	## 虚空之眼
+]
 
 func _ready():
 	# 获取主场景，TODO: 优化获取主节点的方法
@@ -36,11 +42,11 @@ func add_player() -> void:
 
 func initialize_weapons(character: PlayerCharacter) -> void:
 	# 赋予初始武器
-#	obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
-#	obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
-#	obtain_weapon(load("res://weapons/onion/onion.tscn"))
-	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
-#	obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/onion/onion.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
+	character.weapon_comp.obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
 
 
 # 工具方法
