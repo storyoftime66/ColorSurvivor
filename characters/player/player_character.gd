@@ -21,7 +21,7 @@ var movement_input: Vector2
 
 func _ready():
 	# 角色自身属性
-	level_comp.required_exp_evaluator = get_required_exp
+	level_comp.required_xp_evaluator = get_required_xp
 	screen_size = get_viewport_rect().size
 	PlayerManager.emit_signal("player_ready", self)
 	
@@ -43,14 +43,14 @@ func _physics_process(delta):
 	var velocity = velocity
 	
 
-func get_required_exp(level: int) -> float:
+func get_required_xp(level: int) -> float:
 	return level * (level + 1) * 2.5
 
 
 func _on_pickup_component_item_absorbed(pickable_item: BasePickableItem):
 	# 经验的处理方法
 	if pickable_item is Experience:
-		level_comp.gain_exp(pickable_item.amount)
+		level_comp.gain_xp(pickable_item.amount)
 		return
 
 
@@ -59,7 +59,7 @@ func _on_character_component_health_changed(old_value, new_value):
 
 
 func _on_level_component_level_up(new_level):
-	# TODO: 先做到PlayerManager中
+	# TODO
 	get_tree().paused = true
 	var item_page_scene = load("res://ui/gameplay/obtaining_item_page.tscn") as PackedScene
 	var item_page = item_page_scene.instantiate() as ObtainingItemPage
