@@ -55,6 +55,7 @@ class Attribute:
 		return divider
 	
 	func apply_modifier(modifier: Attribute) -> void:
+		base_value += modifier.base_value
 		addition += modifier.addition
 		multiplier += modifier.multiplier
 		divider += modifier.divider
@@ -64,6 +65,7 @@ class Attribute:
 	func duplicate_and_apply_modifier(modifier: Attribute) -> Attribute:
 		var new_attribute = Attribute.new(base_value)
 		new_attribute.is_dirty = true
+		new_attribute.base_value = base_value + modifier.base_value
 		new_attribute.addition = addition + modifier.addition
 		new_attribute.multiplier = multiplier + modifier.multiplier
 		new_attribute.divider = divider + modifier.divider

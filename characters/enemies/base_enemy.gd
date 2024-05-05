@@ -35,7 +35,7 @@ func _on_AttackTimer_timeout() -> void:
 
 func _on_MovementTimer_timeout() -> void:
 	# TODO: 优化移动方式
-	constant_force = (PlayerManager.players[0].position - position).normalized() * speed_force_length
+	constant_force = (PlayerManager.player.position - position).normalized() * speed_force_length
 
 
 func _on_character_component_character_died(comp):

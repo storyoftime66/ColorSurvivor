@@ -7,10 +7,10 @@ extends CanvasLayer
 var level_comp : LevelComponent
 
 func _ready():
-	if (is_instance_valid(PlayerManager.players[0])
-		and is_instance_valid(PlayerManager.players[0].character)
-		and PlayerManager.players[0].character.is_node_ready()):
-		_on_player_ready(PlayerManager.players[0].player_character)
+	if (is_instance_valid(PlayerManager.player)
+		and is_instance_valid(PlayerManager.player.character)
+		and PlayerManager.player.character.is_node_ready()):
+		_on_player_ready(PlayerManager.player.player_character)
 	else:
 		PlayerManager.connect("player_ready", _on_player_ready)
 

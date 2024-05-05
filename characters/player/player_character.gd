@@ -64,6 +64,7 @@ func _on_level_component_level_up(new_level):
 	var item_page_scene = load("res://ui/gameplay/obtaining_item_page.tscn") as PackedScene
 	var item_page = item_page_scene.instantiate() as ObtainingItemPage
 	var weapon_list = PlayerManager.weapon_list.duplicate()
-	weapon_list.shuffle()
-	item_page.item_scenes = weapon_list.slice(0, 3)
+#	weapon_list.shuffle()
+#	item_page.item_scenes = weapon_list.slice(0, 3)
+	item_page.item_scenes = [load("res://weapons/onion/onion.tscn"),]
 	HUD.add_child(item_page)

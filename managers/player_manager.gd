@@ -6,6 +6,7 @@ signal player_ready(player_character: PlayerCharacter)
 var level_node: Node
 
 # 玩家角色及组件
+var player : Player
 var players : Array[Player] = []			## 玩家信息
 var player_character_scene: PackedScene = preload("res://characters/player/player_character.tscn")
 var player_level_component: LevelComponent
@@ -28,15 +29,15 @@ func _ready():
 
 	
 func add_player() -> void:
-	var player = Player.new()
+	var new_player = Player.new()
 	var character = player_character_scene.instantiate()
-	player.character = character
-	players.append(player)
+	new_player.character = character
+	player = new_player
 	
 	level_node.add_child(character)
 	character.position = character.get_viewport_rect().size * 0.5
-	add_child(player)
-	connect("player_ready", player.setup_player)
+	add_child(new_player)
+	connect("player_ready", new_player.setup_player)
 	connect("player_ready", initialize_weapons) ## TODO：移到别处
 
 
@@ -44,8 +45,8 @@ func initialize_weapons(character: PlayerCharacter) -> void:
 	# 赋予初始武器
 #	character.weapon_comp.obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
 #	character.weapon_comp.obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
-#	character.weapon_comp.obtain_weapon(load("res://weapons/onion/onion.tscn"))
-	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
+	character.weapon_comp.obtain_weapon(load("res://weapons/onion/onion.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
 #	character.weapon_comp.obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
 
 

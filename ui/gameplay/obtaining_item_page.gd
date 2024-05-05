@@ -19,6 +19,6 @@ func _ready():
 		hbox.add_child(item_tile)
 
 func _on_item_tile_clicked(item_scene: PackedScene):
-	PlayerManager.players[0].weapon_comp.obtain_weapon(item_scene)
+	PlayerManager.player.weapon_comp.obtain_weapon(item_scene)
 	get_tree().paused = false
 	queue_free()

@@ -2,49 +2,45 @@ class_name BaseWeapon extends Node2D
 # 武器基类
 
 
-@onready var level_node := PlayerManager.level_node
 @onready var shooting_timer := $ShootingTimer as Timer
 @onready var shooting_interval_timer := $ShootingIntervalTimer as Timer
 
 # 武器属性
 @export var projectile_scene: PackedScene	## 武器发射物类
 @export var damage: float = 10.0			## 伤害
-@export var area: float = 5.0				## 伤害范围
+@export var area: float = 5.0				## 伤害范围，单位px
 @export var speed: float = 1000.0			## 发射物飞行速度
-@export var duration: float = 3.0			## 发射物持续时间
+@export var duration: float = 3.0			## 发射物持续时间，单位秒
 @export var amount: int = 1					## 发射物数量
-@export var cooldown: float = 2.0			## 冷却时间
+@export var cooldown: float = 2.0			## 冷却时间，单位秒
 @export var penetration: int = 1			## 穿透数量
 @export var impact: float = 500.0			## 冲击力，可对敌人造成击退
 
-# 连续射击时的射击间隔，通常为常数
-var shooting_interval: float = 0.05
-
-# 武器基础属性，类型: Dictionary[str, Attribute]
-var weapon_attributes: Dictionary = {}
-# 经过增益后的武器属性
-var attributes: Dictionary = {}
+var init_weapon_attributes: Dictionary = {}	## 初始基础属性，便于武器升级时在此基础做增量
+var weapon_attributes: Dictionary = {}		## 武器基础属性，类型: Dictionary[str, Attribute]
+var attributes: Dictionary = {}				## 经过增益后的武器属性
 
 # 武器状态
-# 单次发射中剩余未发射的数量
-var remaining_amount: int = 0
-var weapon_comp: WeaponComponent
+var level := 1								## 武器等级
+var remaining_amount: int = 0				## 单次发射中剩余未发射的数量
+var shooting_interval: float = 0.05			## 连续射击时的射击间隔，通常为常数
+var weapon_comp: WeaponComponent			## 持有者的武器组件
 
 
 func _ready():
 	# 初始化属性
-	weapon_attributes["damage"] = CommonTypes.Attribute.new(damage)
-	weapon_attributes["area"] = CommonTypes.Attribute.new(area)
-	weapon_attributes["speed"] = CommonTypes.Attribute.new(speed)
-	weapon_attributes["duration"] = CommonTypes.Attribute.new(duration)
-	weapon_attributes["amount"] = CommonTypes.Attribute.new(amount)
-	weapon_attributes["cooldown"] = CommonTypes.Attribute.new(cooldown)
-	weapon_attributes["penetration"] = CommonTypes.Attribute.new(penetration)
-	weapon_attributes["impact"] = CommonTypes.Attribute.new(impact)
+	init_weapon_attributes["damage"] = CommonTypes.Attribute.new(damage)
+	init_weapon_attributes["area"] = CommonTypes.Attribute.new(area)
+	init_weapon_attributes["speed"] = CommonTypes.Attribute.new(speed)
+	init_weapon_attributes["duration"] = CommonTypes.Attribute.new(duration)
+	init_weapon_attributes["amount"] = CommonTypes.Attribute.new(amount)
+	init_weapon_attributes["cooldown"] = CommonTypes.Attribute.new(cooldown)
+	init_weapon_attributes["penetration"] = CommonTypes.Attribute.new(penetration)
+	init_weapon_attributes["impact"] = CommonTypes.Attribute.new(impact)
 	
+	weapon_attributes = init_weapon_attributes.duplicate(true)
 	attributes = weapon_attributes.duplicate(true)
 	apply_all_player_bonus()
-	
 	shooting_timer.start(attributes["cooldown"].value)
 
 

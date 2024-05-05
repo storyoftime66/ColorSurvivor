@@ -1,5 +1,5 @@
 class_name ItemTile extends Control
-
+# 道具卡片，用于显示道具信息
 
 signal item_tile_clicked(item_scene: PackedScene)		## 道具卡片被点击时
 
@@ -16,6 +16,7 @@ const ITEM_COMP_NAME := "ItemComponent"
 var item_name : String
 var icon : Texture2D
 var description : String
+var leveled_descriptions : Array[String]
 
 func _ready():
 	update_style()
@@ -51,6 +52,10 @@ func update_style():
 				"description":
 					description = state.get_node_property_value(node_idx, prop_idx)
 					description_node.text = description
+				"leveled_descriptions":
+					leveled_descriptions = state.get_node_property_value(node_idx, prop_idx)
+#					if item_scene
+					pass
 		break
 
 
