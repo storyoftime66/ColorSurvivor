@@ -10,9 +10,9 @@ var active : bool = false
 @onready var laser_sprite := $Laser as Sprite2D
 @onready var laser_duration := $LaserDuration as Timer
 
-const BASE_LENGTH = 158.0 * 0.2
+const BASE_LENGTH = 1.0
 const BASE_WIDTH = 8.0
-const BASE_OFFSET = 158.0 * 0.1
+const BASE_OFFSET = 0.5
 
 
 func _ready():
@@ -28,14 +28,13 @@ func _physics_process(delta):
 func update_attributes():
 	damage = weapon.attributes["damage"].value
 	area = weapon.attributes["area"].value
-	speed = weapon.attributes["speed"].value
 	duration = weapon.attributes["duration"].value
 	impact = weapon.attributes["impact"].value
 	
 	laser_shape.size = Vector2(BASE_LENGTH * area, BASE_WIDTH)
 	var new_position = Vector2(BASE_OFFSET * area, 0.0)
 	laser_collision.position = new_position
-	laser_sprite.scale = Vector2(0.2, area * 0.2)
+	laser_sprite.scale = Vector2(0.2, area / 158.0)
 	laser_sprite.position = new_position
 	
 	if active:

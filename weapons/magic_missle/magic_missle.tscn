@@ -14,3 +14,4 @@ cooldown = 1.0
 [node name="ItemComponent" parent="." index="2"]
 item_name = "魔法弹"
 description = "朝最近敌人发射魔法弹"
+leveled_descriptions = Array[String](["朝最近敌人发射魔法弹", "发射的魔法弹数量增加1", "魔法弹伤害增加5", "魔法弹伤害增加5", "发射的魔法弹数量增加1", "发射魔法弹的间隔减少1秒", "魔法弹伤害增加10", "发射魔法弹的间隔减少1秒"])

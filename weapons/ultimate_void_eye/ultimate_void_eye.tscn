@@ -8,7 +8,9 @@
 script = ExtResource("2_ox8b8")
 projectile_scene = ExtResource("3_f7qsh")
 damage = 25.0
-speed = 100.0
+area = 158.0
+speed = 80.0
+duration = 2.0
 amount = 2
 cooldown = 5.0
 impact = 300.0
@@ -18,4 +20,5 @@ one_shot = false
 
 [node name="ItemComponent" parent="." index="2"]
 item_name = "虚空之眼"
-description = "粉 分 毁灭"
+description = ""
+leveled_descriptions = Array[String](["粉 解 灭", "伤害增加15", "激光范围增加50", "环绕速度增加40", "持续时间增加1秒", "激光范围增加50", "环绕速度增加40", "伤害增加30"])

@@ -4,6 +4,20 @@ class_name FuelDrop extends BaseWeapon
 
 @onready var indicator_comp := $DamageAreaIndicatorComponent as DamageAreaIndicatorComponent
 
+
+# 武器升级所增加的基础属性增量
+# 例：从1级升到2级会添加attribute_delta_list[1]描述的属性增量
+var attribute_upgrade_deltas : Array[Dictionary] = [
+	{},														# level 0[invalid]
+	{"damage": Attribute.new(10.0)},						# level 1
+	{"area": Attribute.new(30.0)},							# level 2
+	{"impact": Attribute.new(200.0)},						# level 3
+	{"amount": Attribute.new(2.0)},							# level 4
+	{"damage": Attribute.new(20.0)},						# level 5
+	{"area": Attribute.new(60.0)},							# level 6
+	{"amount": Attribute.new(4.0)},							# level 7
+]
+
 # [override]
 func spawn_projectile() -> BaseProjectile:
 	var projectile = create_projectile()
@@ -30,3 +44,12 @@ func spawn_projectile() -> BaseProjectile:
 	projectile.global_rotation = start_rot
 	
 	return projectile
+	
+# [override] 武器升级
+func upgrade() -> void:
+	if level >= attribute_upgrade_deltas.size():
+		return
+	for key in attribute_upgrade_deltas[level].keys():
+		weapon_attributes[key].apply_modifier(attribute_upgrade_deltas[level][key])
+		apply_player_bonus(key)
+	level += 1

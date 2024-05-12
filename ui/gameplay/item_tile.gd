@@ -49,13 +49,15 @@ func update_style():
 				"item_icon":
 					icon = state.get_node_property_value(node_idx, prop_idx)
 					icon_node.texture = icon
-				"description":
-					description = state.get_node_property_value(node_idx, prop_idx)
-					description_node.text = description
 				"leveled_descriptions":
 					leveled_descriptions = state.get_node_property_value(node_idx, prop_idx)
-#					if item_scene
-					pass
+					var level = 0
+					var weapon_comp = PlayerManager.player.weapon_comp as WeaponComponent
+					if is_instance_valid(weapon_comp) and weapon_comp.weapons.has(item_scene):
+						level = weapon_comp.weapons[item_scene].level
+						if leveled_descriptions.size() <= level:
+							level = 0	# 防止超出描述列表长度报错
+					description_node.text = leveled_descriptions[level]
 		break
 
 

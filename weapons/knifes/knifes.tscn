@@ -10,8 +10,9 @@ projectile_scene = ExtResource("3_eeuw3")
 damage = 5.0
 speed = 600.0
 amount = 2
-cooldown = 1.0
+impact = 300.0
 
 [node name="ItemComponent" parent="." index="2"]
 item_name = "小刀"
 description = "向前进方向扔出小刀"
+leveled_descriptions = Array[String](["向前进方向掷出飞刀", "飞刀数量增加1", "飞刀伤害增加5", "飞刀穿透增加1", "飞刀击退力增加300", "飞刀数量增加2", "飞刀伤害增加10", "飞刀数量增加3", "飞刀穿透增加2", "飞刀冷却减少1秒"])

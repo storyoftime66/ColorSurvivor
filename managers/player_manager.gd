@@ -7,7 +7,6 @@ var level_node: Node
 
 # 玩家角色及组件
 var player : Player
-var players : Array[Player] = []			## 玩家信息
 var player_character_scene: PackedScene = preload("res://characters/player/player_character.tscn")
 var player_level_component: LevelComponent
 
@@ -45,9 +44,9 @@ func initialize_weapons(character: PlayerCharacter) -> void:
 	# 赋予初始武器
 #	character.weapon_comp.obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
 #	character.weapon_comp.obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
-	character.weapon_comp.obtain_weapon(load("res://weapons/onion/onion.tscn"))
-#	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
-#	character.weapon_comp.obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/onion/onion.tscn"))
+	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
+	character.weapon_comp.obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
 
 
 # 工具方法

@@ -2,6 +2,19 @@ class_name UltimateVoidEye extends BaseWeapon
 ## [终极武器]虚空之眼，会在玩家角色身边盘旋，隔一段时间发射一次激光
 
 
+# 武器升级所增加的基础属性增量
+# 例：从1级升到2级会添加attribute_delta_list[1]描述的属性增量
+var attribute_upgrade_deltas : Array[Dictionary] = [
+	{},														# level 0[invalid]
+	{"damage": Attribute.new(15.0)},						# level 1
+	{"area": Attribute.new(50.0)},							# level 2
+	{"speed": Attribute.new(40.0)},							# level 3
+	{"duration": Attribute.new(1.0)},						# level 4
+	{"area": Attribute.new(50.0)},							# level 5
+	{"speed": Attribute.new(40.0)},							# level 6
+	{"damage": Attribute.new(30.0)},						# level 7
+]
+
 var eyes: Array[UltimateVoidEyeProjectile]
 var eye_num := 0:
 	get:
@@ -24,7 +37,6 @@ func _ready():
 	shooting_interval_timer.wait_time = shooting_interval
 	super._ready()
 
-
 # [override]
 func spawn_projectile() -> BaseProjectile:
 	var eye = create_projectile() as UltimateVoidEyeProjectile
@@ -37,7 +49,6 @@ func spawn_projectile() -> BaseProjectile:
 	
 	return eye
 
-
 func relayout_children() -> void:
 	shooting_interval = 0.6 / amount
 	
@@ -46,8 +57,7 @@ func relayout_children() -> void:
 		eyes[i].rotation = angle * i
 		eyes[i].position = Vector2(hover_radius, 0).rotated(angle * i)
 
-
-func apply_bonus(attribute_name: String, bonus: CommonTypes.Attribute) -> void:
+func apply_bonus(attribute_name: String, bonus: Attribute) -> void:
 	super.apply_bonus(attribute_name, bonus)
 	match attribute_name:
 		"speed":
@@ -56,14 +66,12 @@ func apply_bonus(attribute_name: String, bonus: CommonTypes.Attribute) -> void:
 			var new_eye_num = int(attributes["amount"].value)
 			while new_eye_num > eye_num:
 				spawn_projectile()
-		"area":
+		_:
 			for eye in eyes:
 				eye.update_attributes()
 
-
 func _process(delta):
 	rotate(hover_angular_velocity * delta)
-
 
 func shoot() -> void:
 	shooting_timer.start(attributes["cooldown"].value + attributes["duration"].value)
@@ -73,7 +81,6 @@ func shoot() -> void:
 		lasing_queue.push_back(0)
 		if shooting_interval_timer.is_stopped():
 			shooting_interval_timer.start()
-
 
 func shoot_single_projectile() -> void:
 	for _i in range(lasing_num):
@@ -88,3 +95,12 @@ func shoot_single_projectile() -> void:
 			lasing_num = 0
 			shooting_interval_timer.stop()
 			break
+
+# [override] 武器升级
+func upgrade() -> void:
+	if level >= attribute_upgrade_deltas.size():
+		return
+	for key in attribute_upgrade_deltas[level].keys():
+		weapon_attributes[key].apply_modifier(attribute_upgrade_deltas[level][key])
+		apply_player_bonus(key)
+	level += 1

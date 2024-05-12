@@ -2,10 +2,12 @@ class_name BaseWeapon extends Node2D
 # 武器基类
 
 
+const Attribute = CommonTypes.Attribute
+
 @onready var shooting_timer := $ShootingTimer as Timer
 @onready var shooting_interval_timer := $ShootingIntervalTimer as Timer
 
-# 武器属性
+# 武器初始属性
 @export var projectile_scene: PackedScene	## 武器发射物类
 @export var damage: float = 10.0			## 伤害
 @export var area: float = 5.0				## 伤害范围，单位px
@@ -16,6 +18,7 @@ class_name BaseWeapon extends Node2D
 @export var penetration: int = 1			## 穿透数量
 @export var impact: float = 500.0			## 冲击力，可对敌人造成击退
 
+# 武器属性
 var init_weapon_attributes: Dictionary = {}	## 初始基础属性，便于武器升级时在此基础做增量
 var weapon_attributes: Dictionary = {}		## 武器基础属性，类型: Dictionary[str, Attribute]
 var attributes: Dictionary = {}				## 经过增益后的武器属性
@@ -29,14 +32,14 @@ var weapon_comp: WeaponComponent			## 持有者的武器组件
 
 func _ready():
 	# 初始化属性
-	init_weapon_attributes["damage"] = CommonTypes.Attribute.new(damage)
-	init_weapon_attributes["area"] = CommonTypes.Attribute.new(area)
-	init_weapon_attributes["speed"] = CommonTypes.Attribute.new(speed)
-	init_weapon_attributes["duration"] = CommonTypes.Attribute.new(duration)
-	init_weapon_attributes["amount"] = CommonTypes.Attribute.new(amount)
-	init_weapon_attributes["cooldown"] = CommonTypes.Attribute.new(cooldown)
-	init_weapon_attributes["penetration"] = CommonTypes.Attribute.new(penetration)
-	init_weapon_attributes["impact"] = CommonTypes.Attribute.new(impact)
+	init_weapon_attributes["damage"] = Attribute.new(damage)
+	init_weapon_attributes["area"] = Attribute.new(area)
+	init_weapon_attributes["speed"] = Attribute.new(speed)
+	init_weapon_attributes["duration"] = Attribute.new(duration)
+	init_weapon_attributes["amount"] = Attribute.new(amount)
+	init_weapon_attributes["cooldown"] = Attribute.new(cooldown)
+	init_weapon_attributes["penetration"] = Attribute.new(penetration)
+	init_weapon_attributes["impact"] = Attribute.new(impact)
 	
 	weapon_attributes = init_weapon_attributes.duplicate(true)
 	attributes = weapon_attributes.duplicate(true)
@@ -46,13 +49,13 @@ func _ready():
 
 #region Bonus
 # 应用增益
-func apply_bonus(attribute_name: String, bonus: CommonTypes.Attribute) -> void:
+func apply_bonus(attribute_name: String, bonus: Attribute) -> void:
 	attributes[attribute_name] = weapon_attributes[attribute_name].duplicate_and_apply_modifier(bonus)
 	
 # 应用所有增益
 func apply_all_bonus(bonus_dict: Dictionary) -> void:
 	for key in weapon_attributes.keys():
-		if bonus_dict.has(key) and bonus_dict[key] is CommonTypes.Attribute:
+		if bonus_dict.has(key) and bonus_dict[key] is Attribute:
 			apply_bonus(key, bonus_dict[key])
 
 # 应用玩家角色的增益

@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ce578vgimeu1f" path="res://weapons/base_weapon.tscn" id="1_tlul7"]
 [ext_resource type="Script" path="res://weapons/fuel_drop/fuel_drop.gd" id="2_3dhxc"]
 [ext_resource type="PackedScene" uid="uid://buxq2evencypd" path="res://weapons/fuel_drop/fuel_drop_projectile.tscn" id="3_sgjti"]
-[ext_resource type="PackedScene" uid="uid://dckuvk6m5acxy" path="res://weapon_components/damage_area_indicator_component/damage_area_indicator_component.tscn" id="4_ky4hn"]
-[ext_resource type="PackedScene" uid="uid://biw6bvvcpilyo" path="res://weapon_components/damage_area_indicator_component/circle_area_indicator.tscn" id="5_cvlct"]
+[ext_resource type="PackedScene" uid="uid://dckuvk6m5acxy" path="res://components/damage_area_indicator_component/damage_area_indicator_component.tscn" id="4_ky4hn"]
+[ext_resource type="PackedScene" uid="uid://biw6bvvcpilyo" path="res://components/damage_area_indicator_component/circle_area_indicator.tscn" id="5_cvlct"]
 
 [node name="FuelDrop" instance=ExtResource("1_tlul7")]
 script = ExtResource("2_3dhxc")
@@ -20,3 +20,4 @@ indicator_class = ExtResource("5_cvlct")
 [node name="ItemComponent" parent="." index="3"]
 item_name = "燃料液滴"
 description = "在随机位置造成范围伤害"
+leveled_descriptions = Array[String](["在随机位置造成范围伤害", "增加爆炸伤害10", "增加爆炸范围30", "增加击退力200", "增加液滴数量2", "增加爆炸伤害20", "增加爆炸范围60", "增加液滴数量4"])

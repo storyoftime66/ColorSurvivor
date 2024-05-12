@@ -1,7 +1,7 @@
 class_name Onion extends BaseWeapon
 # 洋葱，对角色附近敌人周期性造成伤害
 
-const Attribute = CommonTypes.Attribute
+
 var enemies_in_range: Array[BaseEnemy] = []			# 在范围内的敌人
 
 @onready var collision_shape := $DamageArea/CollisionShape2D.shape as CircleShape2D
@@ -9,7 +9,7 @@ var enemies_in_range: Array[BaseEnemy] = []			# 在范围内的敌人
 
 # 武器升级所增加的基础属性增量
 # 例：从1级升到2级会添加attribute_delta_list[1]描述的属性增量
-var attribute_deltas : Array[Dictionary] = [
+var attribute_upgrade_deltas : Array[Dictionary] = [
 	{},														# level 0[invalid]
 	{"damage": Attribute.new(1.0)},							# level 1
 	{"area": Attribute.new(20.0)},							# level 2
@@ -38,15 +38,16 @@ func shoot():
 
 # [override] 武器升级
 func upgrade() -> void:
-	if level >= attribute_deltas.size():
+	if level >= attribute_upgrade_deltas.size():
 		return
-	for key in attribute_deltas[level].keys():
-		weapon_attributes[key].apply_modifier(attribute_deltas[level][key])
+	for key in attribute_upgrade_deltas[level].keys():
+		weapon_attributes[key].apply_modifier(attribute_upgrade_deltas[level][key])
 		apply_player_bonus(key)
-	level += 1	
+	level += 1
 	update_style()
 	
-
+	
+# 更新武器的视觉展示效果
 func update_style() -> void:
 	collision_shape.radius = attributes["area"].value
 	# 缩放sprite
