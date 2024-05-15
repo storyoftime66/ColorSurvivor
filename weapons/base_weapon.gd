@@ -1,5 +1,8 @@
 class_name BaseWeapon extends Node2D
 # 武器基类
+# 武器属性由武器基础属性与角色加成计算而来，读取attributes[attr_name]即可
+# 其中attr_name在以下字符串中选择：
+# damage, area, speed, duration, amount, cooldown, penetration, impact
 
 
 const Attribute = CommonTypes.Attribute
@@ -68,7 +71,7 @@ func apply_all_player_bonus() -> void:
 #endregion
 
 
-# [需要重载] 构造发射物，可能会需要进行其他初始化操作，在子类重载中实现
+# [需要重载] 构造发射物并设置发射物属性，可能会需要进行其他初始化操作，在子类重载中实现
 func create_projectile() -> BaseProjectile:
 	var projectile = projectile_scene.instantiate() as BaseProjectile
 	projectile.damage = attributes["damage"].value
@@ -90,7 +93,8 @@ func spawn_projectile() -> BaseProjectile:
 	return projectile
 
 
-# [需要重载] 进行射击
+# [需要重载] 进行射击，由ShootingTimer触发
+# 注意：每次射击可能会调用多次shoot_single_projectile()，用于生成多发子弹
 func shoot() -> void:
 	remaining_amount = int(attributes["amount"].value)
 	shooting_interval_timer.start(shooting_interval)
@@ -99,7 +103,8 @@ func shoot() -> void:
 	shooting_timer.start(interval_between_shots)
 
 
-# [需要重载]单发射击（子类通常需要重载这个方法来实现自己的射击效果）
+# [需要重载] 单发射击，由ShootIntervalTimer触发
+# 子类通常需要重载这个方法来实现自己的射击效果
 func shoot_single_projectile() -> void:
 	remaining_amount -= 1
 	if remaining_amount >= 0:

@@ -13,6 +13,7 @@ var health : float :					## 当前生命值
 @export var armor := 0.0:				## 护甲，可以提供一定比例的伤害减免
 	set=set_armor
 @export var mass := 1.0					## 质量，高质量单位受到冲击力的影响较低
+@export var show_damage_number := true	## 受到伤害时是否显示伤害数字
 
 var initialized := false				## 组件是否初始化完成
 var damage_multiplier := 1.0			## 伤害系数，为0.0时表示完全不受伤害

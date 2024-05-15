@@ -9,6 +9,7 @@
 radius = 20.025
 
 [node name="Enemy" type="RigidBody2D"]
+z_index = 700
 gravity_scale = 0.0
 linear_damp = 5.0
 angular_damp = 5.0

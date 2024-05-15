@@ -45,8 +45,9 @@ func initialize_weapons(character: PlayerCharacter) -> void:
 #	character.weapon_comp.obtain_weapon(load("res://weapons/magic_missle/magic_missle.tscn"))
 #	character.weapon_comp.obtain_weapon(load("res://weapons/knifes/knifes.tscn"))
 #	character.weapon_comp.obtain_weapon(load("res://weapons/onion/onion.tscn"))
-	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
-	character.weapon_comp.obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/ultimate_void_eye/ultimate_void_eye.tscn"))
+#	character.weapon_comp.obtain_weapon(load("res://weapons/fuel_drop/fuel_drop.tscn"))
+	character.weapon_comp.obtain_weapon(load("res://weapons/blood_stains/blood_stains.tscn"))
 
 
 # 工具方法
