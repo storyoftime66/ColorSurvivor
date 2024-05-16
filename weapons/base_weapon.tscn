@@ -15,7 +15,6 @@ one_shot = true
 [node name="ItemComponent" parent="." instance=ExtResource("2_behqf")]
 item_name = "基础武器"
 item_icon = ExtResource("3_cx3rt")
-description = "基础武器描述"
 
 [connection signal="timeout" from="ShootingTimer" to="." method="shoot"]
 [connection signal="timeout" from="ShootingIntervalTimer" to="." method="shoot_single_projectile"]

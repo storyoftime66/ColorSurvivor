@@ -33,7 +33,7 @@ wait_time = 0.25
 autostart = true
 
 [node name="CharacterComponent" parent="." instance=ExtResource("2_oy8y4")]
-max_health = 50.0
+max_health = 10.0
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_AttackRange_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_AttackRange_body_exited"]

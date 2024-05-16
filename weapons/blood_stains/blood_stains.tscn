@@ -8,5 +8,10 @@
 script = ExtResource("2_1ub15")
 projectile_scene = ExtResource("3_c5dj0")
 damage = 5.0
+area = 15.0
+duration = 1.0
 cooldown = 0.2
 impact = 0.0
+
+[node name="ItemComponent" parent="." index="2"]
+leveled_descriptions = Array[String](["在走过的地面留下血迹，对血迹上的敌人持续造成伤害", "血迹造成伤害增加3", "血迹大小增加5", "血迹造成伤害增加7", "血迹大小增加5", "血迹持续时间延长1秒", "血迹大小增加5", "血迹持续时间延长1秒"])

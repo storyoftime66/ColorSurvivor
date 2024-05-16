@@ -66,5 +66,5 @@ func _on_level_component_level_up(new_level):
 	var weapon_list = PlayerManager.weapon_list.duplicate()
 #	weapon_list.shuffle()
 #	item_page.item_scenes = weapon_list.slice(0, 3)
-	item_page.item_scenes = [load("res://weapons/fuel_drop/fuel_drop.tscn"),]
+	item_page.item_scenes = [load("res://weapons/fuel_drop/fuel_drop.tscn"), load("res://weapons/blood_stains/blood_stains.tscn")]
 	HUD.add_child(item_page)

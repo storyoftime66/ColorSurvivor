@@ -2,7 +2,7 @@ class_name BaseEnemy extends RigidBody2D
 # 敌人基类
 
 @export var attack_damage: float = 5.0			## 攻击伤害
-@export var xp_amount: float = 1.0		## 经验值
+@export var xp_amount: float = 5.0		## 经验值
 
 @onready var attack_timer := $AttackTimer as Timer
 @onready var character_comp := $CharacterComponent as CharacterComponent

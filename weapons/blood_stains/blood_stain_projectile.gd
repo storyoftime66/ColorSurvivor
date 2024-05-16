@@ -5,12 +5,21 @@ class_name BloodStainProjectile extends BaseProjectile
 var enemies_on_stain : Array[BaseEnemy] = []		## 在这块血迹上的敌人
 var weapon : BloodStains							## 武器对象
 
-@onready var collision := $CollisionShape2D as CollisionShape2D
+@onready var collision_shape := $CollisionShape2D.shape as RectangleShape2D
+@onready var polygon := $Polygon2D as Polygon2D
 
 
 func _ready():
 	super._ready()
-	self.set_physics_process(false)
+	set_physics_process(false)
+	collision_shape.size = Vector2(area * 2.0, area * 2.0)
+	polygon.polygon = PackedVector2Array([
+		Vector2(area, area),
+		Vector2(-area, area),
+		Vector2(-area, -area),
+		Vector2(area, -area),
+	])
+	
 
 func _on_hit(body):
 	var enemy = body as BaseEnemy

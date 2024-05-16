@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsk3rqhoy3bxy"]
+
+[ext_resource type="PackedScene" uid="uid://52hu2acvry6v" path="res://characters/enemies/base_enemy.tscn" id="1_g8nq7"]
+[ext_resource type="Script" path="res://characters/enemies/rect_enemy/rect_enemy.gd" id="2_mdtrd"]
+
+[node name="Enemy" instance=ExtResource("1_g8nq7")]
+script = ExtResource("2_mdtrd")
+
+[node name="MovementTimer" parent="." index="3"]
+process_callback = 0
