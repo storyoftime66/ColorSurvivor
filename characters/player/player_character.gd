@@ -24,7 +24,7 @@ func _ready():
 	level_comp.required_xp_evaluator = get_required_xp
 	screen_size = get_viewport_rect().size
 	PlayerManager.emit_signal("player_ready", self)
-	
+
 
 func _physics_process(delta):
 	# 移动输入处理
@@ -40,8 +40,7 @@ func _physics_process(delta):
 	var movement_direction = movement_input.normalized()
 	set_velocity(movement_direction * character_comp.move_speed)
 	move_and_slide()
-	var velocity = velocity
-	
+
 
 func get_required_xp(level: int) -> float:
 	return level * (level + 1) * 2.5
@@ -64,7 +63,7 @@ func _on_level_component_level_up(new_level):
 	var item_page_scene = load("res://ui/gameplay/obtaining_item_page.tscn") as PackedScene
 	var item_page = item_page_scene.instantiate() as ObtainingItemPage
 	var weapon_list = PlayerManager.weapon_list.duplicate()
-#	weapon_list.shuffle()
-#	item_page.item_scenes = weapon_list.slice(0, 3)
-	item_page.item_scenes = [load("res://weapons/fuel_drop/fuel_drop.tscn"), load("res://weapons/blood_stains/blood_stains.tscn")]
+	weapon_list.shuffle()
+	item_page.item_scenes = weapon_list.slice(0, 3)
+	# item_page.item_scenes = [load("res://weapons/fuel_drop/fuel_drop.tscn"), load("res://weapons/blood_stains/blood_stains.tscn")]
 	HUD.add_child(item_page)
