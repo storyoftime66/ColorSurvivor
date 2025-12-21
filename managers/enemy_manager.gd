@@ -21,6 +21,8 @@ const intervals = [
 	[180.0, 0.1, 2],
 	[240.0, 0.1, 3],
 ]  # (游戏时间, 生成间隔, 生成器数量)
+var enemy_health = 10.0
+var enemy_mass = 1.0
 
 # 游戏时间追踪
 var game_time: float = 0.0  ## 游戏时间（秒）
@@ -59,6 +61,11 @@ func _process(delta: float) -> void:
 
 			_interval_index += 1
 
+	if int(game_time / 5.0) > enemy_health:
+		enemy_health = int(game_time / 5.0)
+	if int(game_time / 50.0) > enemy_mass:
+		enemy_mass = pow(2, int(game_time / 50.0))
+
 
 # 获取最近敌人的位置
 func get_closest_enemy_position() -> Vector2:
@@ -83,9 +90,15 @@ func _on_EnemySpawning_timeout() -> void:
 	# 在玩家屏幕外生成，随机旋转
 	enemy.position = PlayerManager.player.position + relative_position
 	enemy.rotation = randf() * 2 * PI
-
+	enemy.ready.connect(_on_enemy_spawned.bind(enemy))
 	level_node.add_child(enemy)
 	enemy.add_to_group("enemies")
+
+
+func _on_enemy_spawned(enemy: BaseEnemy) -> void:
+	enemy.character_comp.max_health = enemy_health
+	enemy.character_comp.health = enemy_health
+	enemy.character_comp.mass = enemy_mass
 
 
 func spawn_experience(experience_amount: float, pos: Vector2) -> void:
