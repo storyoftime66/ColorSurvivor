@@ -25,7 +25,3 @@ impact = 200.0
 
 [node name="DamageAreaIndicatorComponent" parent="." index="2" instance=ExtResource("4_ky4hn")]
 indicator_class = ExtResource("5_cvlct")
-
-[node name="ItemComponent" parent="." index="3"]
-item_name = "燃料液滴"
-leveled_descriptions = Array[String](["在随机位置造成范围伤害", "增加爆炸伤害10", "增加爆炸范围30", "增加击退力200", "增加液滴数量2", "增加爆炸伤害20", "增加爆炸范围60", "增加液滴数量4"])

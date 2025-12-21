@@ -37,9 +37,5 @@ self_modulate = Color(1, 1, 1, 0.156863)
 scale = Vector2(0.565, 0.565)
 texture = ExtResource("2")
 
-[node name="ItemComponent" parent="." index="4"]
-item_name = "洋葱"
-leveled_descriptions = Array[String](["对周围敌人持续造成伤害", "增加1点伤害", "增加20范围", "增加50击退", "增加2点伤害", "增加50击退", "增加50范围", "增加5点伤害"])
-
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_DamageArea_body_exited"]
