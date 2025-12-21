@@ -25,6 +25,7 @@ HUD="*res://ui/hud/main_hud.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -41,6 +42,7 @@ enabled=PackedStringArray("res://addons/softbody2d/plugin.cfg")
 
 [gui]
 
+theme/custom_font="res://ui/fonts/SourceHanSansSC-Regular.ttf"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]
