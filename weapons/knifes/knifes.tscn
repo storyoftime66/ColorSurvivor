@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://daraunwuj0m8r"]
+[gd_scene load_steps=7 format=3 uid="uid://daraunwuj0m8r"]
 
 [ext_resource type="Script" path="res://weapons/knifes/knifes.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://ce578vgimeu1f" path="res://weapons/base_weapon.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bxs0ulj4ck4xr" path="res://weapons/knifes/knife_projectile.tscn" id="3_eeuw3"]
+[ext_resource type="Script" path="res://components/item_component/item_type.gd" id="3_jjbhy"]
+[ext_resource type="Texture2D" uid="uid://ohnrcoo1emvj" path="res://icon.png" id="3_qvg7n"]
+
+[sub_resource type="Resource" id="Resource_tas4j"]
+script = ExtResource("3_jjbhy")
+name = "小刀"
+icon = ExtResource("3_qvg7n")
+leveled_descriptions = Array[String](["向前进方向掷出飞刀", "飞刀数量增加1", "飞刀伤害增加5", "飞刀穿透增加1", "飞刀击退力增加300", "飞刀数量增加2", "飞刀伤害增加10", "飞刀数量增加3", "飞刀穿透增加2", "飞刀冷却减少1秒"])
 
 [node name="Knifes" instance=ExtResource("2")]
 script = ExtResource("1")
+item_type = SubResource("Resource_tas4j")
 projectile_scene = ExtResource("3_eeuw3")
 damage = 5.0
 speed = 600.0
@@ -14,5 +23,4 @@ impact = 300.0
 
 [node name="ItemComponent" parent="." index="2"]
 item_name = "小刀"
-description = "向前进方向扔出小刀"
 leveled_descriptions = Array[String](["向前进方向掷出飞刀", "飞刀数量增加1", "飞刀伤害增加5", "飞刀穿透增加1", "飞刀击退力增加300", "飞刀数量增加2", "飞刀伤害增加10", "飞刀数量增加3", "飞刀穿透增加2", "飞刀冷却减少1秒"])

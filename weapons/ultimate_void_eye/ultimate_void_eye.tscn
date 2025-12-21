@@ -1,11 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://rokx6p7qp7ej"]
+[gd_scene load_steps=8 format=3 uid="uid://rokx6p7qp7ej"]
 
 [ext_resource type="PackedScene" uid="uid://ce578vgimeu1f" path="res://weapons/base_weapon.tscn" id="1_ew2xa"]
 [ext_resource type="Script" path="res://weapons/ultimate_void_eye/ultimate_void_eye.gd" id="2_ox8b8"]
 [ext_resource type="PackedScene" uid="uid://dh56ah10pachl" path="res://weapons/ultimate_void_eye/ultimate_void_eye_projectile.tscn" id="3_f7qsh"]
+[ext_resource type="Texture2D" uid="uid://ohnrcoo1emvj" path="res://icon.png" id="3_g8r04"]
+[ext_resource type="Script" path="res://components/item_component/item_type.gd" id="4_c0gko"]
+
+[sub_resource type="Resource" id="Resource_kpsnb"]
+script = ExtResource("4_c0gko")
+name = "虚空之眼"
+icon = ExtResource("3_g8r04")
+leveled_descriptions = Array[String](["粉 解 灭", "伤害增加15", "激光范围增加50", "环绕速度增加40", "持续时间增加1秒", "激光范围增加50", "环绕速度增加40", "伤害增加30"])
+
+[sub_resource type="Resource" id="Resource_bh1w1"]
+script = ExtResource("4_c0gko")
+name = "虚空之眼"
+icon = ExtResource("3_g8r04")
+leveled_descriptions = Array[String](["粉 解 灭", "伤害增加15", "激光范围增加50", "环绕速度增加40", "持续时间增加1秒", "激光范围增加50", "环绕速度增加40", "伤害增加30"])
 
 [node name="UltimateVoidEye" instance=ExtResource("1_ew2xa")]
 script = ExtResource("2_ox8b8")
+item_type = SubResource("Resource_kpsnb")
 projectile_scene = ExtResource("3_f7qsh")
 damage = 25.0
 area = 158.0
@@ -21,3 +36,4 @@ one_shot = false
 [node name="ItemComponent" parent="." index="2"]
 item_name = "虚空之眼"
 leveled_descriptions = Array[String](["粉 解 灭", "伤害增加15", "激光范围增加50", "环绕速度增加40", "持续时间增加1秒", "激光范围增加50", "环绕速度增加40", "伤害增加30"])
+item_type = SubResource("Resource_bh1w1")

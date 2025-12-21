@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://djl1ijj4a4nun"]
+[gd_scene load_steps=7 format=3 uid="uid://djl1ijj4a4nun"]
 
 [ext_resource type="Script" path="res://weapons/blood_stains/blood_stains.gd" id="2_1ub15"]
 [ext_resource type="PackedScene" uid="uid://ce578vgimeu1f" path="res://weapons/base_weapon.tscn" id="2_2dpoo"]
+[ext_resource type="Script" path="res://components/item_component/item_type.gd" id="3_2ipu6"]
+[ext_resource type="Texture2D" uid="uid://ohnrcoo1emvj" path="res://icon.png" id="3_a87l3"]
 [ext_resource type="PackedScene" uid="uid://sfqb237rhqgr" path="res://weapons/blood_stains/blood_stain_projectile.tscn" id="3_c5dj0"]
+
+[sub_resource type="Resource" id="Resource_hnlxb"]
+script = ExtResource("3_2ipu6")
+name = "血迹"
+icon = ExtResource("3_a87l3")
+leveled_descriptions = Array[String](["在走过的地面留下血迹，对血迹上的敌人持续造成伤害", "血迹造成伤害增加3", "血迹大小增加5", "血迹造成伤害增加7", "血迹大小增加5", "血迹持续时间延长1秒", "血迹大小增加5", "血迹持续时间延长1秒"])
 
 [node name="BloodStains" instance=ExtResource("2_2dpoo")]
 script = ExtResource("2_1ub15")
+item_type = SubResource("Resource_hnlxb")
 projectile_scene = ExtResource("3_c5dj0")
 damage = 5.0
 area = 15.0

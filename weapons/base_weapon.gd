@@ -10,6 +10,9 @@ const Attribute = CommonTypes.Attribute
 @onready var shooting_timer := $ShootingTimer as Timer
 @onready var shooting_interval_timer := $ShootingIntervalTimer as Timer
 
+# 武器描述数据
+@export var item_type : ItemType
+
 # 武器初始属性
 @export var projectile_scene: PackedScene	## 武器发射物类
 @export var damage: float = 10.0			## 伤害

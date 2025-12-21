@@ -5,6 +5,7 @@ signal item_tile_clicked(item_scene: PackedScene)		## 道具卡片被点击时
 
 # ItemComponent节点的名称，通过名称来识别节点。TODO: 改进
 const ITEM_COMP_NAME := "ItemComponent"
+const ITEM_TYPE_NAME := "item_type"
 
 @export var item_scene : PackedScene : ## 包含ItemComponent节点的场景
 	set = set_item_scene
@@ -33,32 +34,35 @@ func set_item_scene(value: PackedScene):
 func update_style():
 	if item_scene == null:
 		return
-		
-	var state = item_scene.get_state()
-	for node_idx in range(state.get_node_count()):
-		# 通过名称判断节点是否为ItemComponent
-		if state.get_node_name(node_idx) != ITEM_COMP_NAME:
-			continue
-			
-		# 读取item_component节点的默认值
-		for prop_idx in range(state.get_node_property_count(node_idx)):
-			match state.get_node_property_name(node_idx, prop_idx):
-				"item_name":
-					item_name = state.get_node_property_value(node_idx, prop_idx)
-					item_name_node.text = item_name
-				"item_icon":
-					icon = state.get_node_property_value(node_idx, prop_idx)
-					icon_node.texture = icon
-				"leveled_descriptions":
-					leveled_descriptions = state.get_node_property_value(node_idx, prop_idx)
-					var level = 0
-					var weapon_comp = PlayerManager.player.weapon_comp as WeaponComponent
-					if is_instance_valid(weapon_comp) and weapon_comp.weapons.has(item_scene):
-						level = weapon_comp.weapons[item_scene].level
-						if leveled_descriptions.size() <= level:
-							level = 0	# 防止超出描述列表长度报错
-					description_node.text = leveled_descriptions[level]
-		break
+
+	var state := item_scene.get_state()
+	var root_idx = 0
+	var item_type_resource : ItemType = null
+	# 遍历根节点的所有属性
+	for prop_idx in range(state.get_node_property_count(root_idx)):
+		if state.get_node_property_name(root_idx, prop_idx) == ITEM_TYPE_NAME:
+			item_type_resource = state.get_node_property_value(root_idx, prop_idx) as ItemType
+			break
+
+	if item_type_resource == null:
+		printerr("ItemType resource is null")
+		return
+
+	item_name = item_type_resource.name
+	item_name_node.text = item_name
+	icon = item_type_resource.icon
+	icon_node.texture = icon
+	leveled_descriptions = item_type_resource.leveled_descriptions
+	var _description = ""
+	var level = 0
+	var weapon_comp = PlayerManager.player.weapon_comp as WeaponComponent
+	if is_instance_valid(weapon_comp) and weapon_comp.weapons.has(item_scene):
+		level = weapon_comp.weapons[item_scene].level
+		if level >= leveled_descriptions.size():
+			level = 0	# 防止超出描述列表长度报错
+	if level < leveled_descriptions.size():
+		_description = leveled_descriptions[level]
+	description_node.text = _description
 
 
 func _on_gui_input(event: InputEvent):
