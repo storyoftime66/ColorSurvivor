@@ -9,24 +9,30 @@ var duration: float = 3.0
 var penetration: int = 1
 var impact: float = 500.0
 
-# 可选参数: 起始位置, 目标位置
-var start_position: Vector2
-var target_position: Vector2
+# 可选参数
+var weapon : BaseWeapon = null  # 武器对象
+var start_position: Vector2     # 起始位置
+var target_position: Vector2    # 目标位置
+
 
 func _ready():
 	$LifeSpan.start(duration)
+
 
 # 向前移动
 func _physics_process(delta):
 	move_local_x(speed * delta)
 
+
 # 销毁发射物
 func destroy() -> void:
 	queue_free()
 
+
 # 持续时间结束时，子类可重写
 func _on_LifeSpan_timeout():
 	destroy()
+
 
 # 命中敌人时，子类可重写
 func _on_hit(body):

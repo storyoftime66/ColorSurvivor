@@ -3,7 +3,6 @@ class_name BloodStainProjectile extends BaseProjectile
 # 用于检测踩在其中的敌人。由于该发射物的特殊性，将其z index设为const.Z_INDEX_INDICATOR
 
 var enemies_on_stain : Array[BaseEnemy] = []		## 在这块血迹上的敌人
-var weapon : BloodStains							## 武器对象
 
 @onready var collision_shape := $CollisionShape2D.shape as RectangleShape2D
 @onready var polygon := $Polygon2D as Polygon2D
@@ -19,9 +18,11 @@ func _ready():
 		Vector2(-area, -area),
 		Vector2(area, -area),
 	])
-	
+
 
 func _on_hit(body):
+	if not weapon is BloodStains:
+		return
 	var enemy = body as BaseEnemy
 	if is_instance_valid(enemy):
 		enemies_on_stain.append(enemy)
@@ -30,9 +31,12 @@ func _on_hit(body):
 		else:
 			weapon.enemies_on_stains[enemy] = 1
 
+
 # [override]
 func destroy():
 	# 销毁时移除敌人
+	if not weapon is BloodStains:
+		return
 	for enemy in enemies_on_stain:
 		if weapon.enemies_on_stains.has(enemy):
 			var count = weapon.enemies_on_stains[enemy] - 1
