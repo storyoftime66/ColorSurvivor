@@ -21,6 +21,7 @@ var attribute_upgrade_deltas : Array[Dictionary] = [
 	{"duration": Attribute.new(1.0)},						# level 7
 ]
 
+
 func _ready():
 	super._ready()
 	shooting_timer.start(DAMAGE_INTERVAL)  # 1s造成一次伤害
@@ -41,15 +42,18 @@ func shoot() -> void:
 				enemies_on_stains.erase(enemy)
 	shooting_timer.start(DAMAGE_INTERVAL)
 
+
 # [override] 生成一块血迹
 func shoot_single_projectile() -> void:
 	spawn_projectile()
+
 
 # [override] 构造血迹
 func create_projectile() -> BaseProjectile:
 	var projectile = super.create_projectile()
 	projectile.weapon = self
 	return projectile
+
 
 # [override] 武器升级
 func upgrade() -> void:

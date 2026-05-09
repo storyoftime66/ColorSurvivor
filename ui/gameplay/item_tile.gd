@@ -4,10 +4,9 @@ class_name ItemTile extends Control
 signal item_tile_clicked(item_scene: PackedScene)		## 道具卡片被点击时
 
 # ItemComponent节点的名称，通过名称来识别节点。TODO: 改进
-const ITEM_COMP_NAME := "ItemComponent"
 const ITEM_TYPE_NAME := "item_type"
 
-@export var item_scene : PackedScene : ## 包含ItemComponent节点的场景
+@export var item_scene : PackedScene :
 	set = set_item_scene
 
 @onready var icon_node := $Margin/VBox/Icon as TextureRect
@@ -38,7 +37,7 @@ func update_style():
 	var state := item_scene.get_state()
 	var root_idx = 0
 	var item_type_resource : ItemType = null
-	# 遍历根节点的所有属性
+	# 遍历根节点的所有属性，需要设置ItemType类型的属性名为 item_type
 	for prop_idx in range(state.get_node_property_count(root_idx)):
 		if state.get_node_property_name(root_idx, prop_idx) == ITEM_TYPE_NAME:
 			item_type_resource = state.get_node_property_value(root_idx, prop_idx) as ItemType
@@ -67,4 +66,4 @@ func update_style():
 
 func _on_gui_input(event: InputEvent):
 	if event.is_pressed():
-		emit_signal("item_tile_clicked", item_scene)
+		item_tile_clicked.emit(item_scene)

@@ -2,7 +2,6 @@ class_name UltimateVoidEyeProjectile extends BaseProjectile
 ## 环绕的虚空之眼
 
 
-var weapon : UltimateVoidEye
 var active : bool = false
 
 @onready var laser_collision := $CollisionShape2D as CollisionShape2D
